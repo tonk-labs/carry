@@ -36,7 +36,7 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-1a058eae.js";
+            window.path_to_searchindex_js = "searchindex-f3261ebe.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc-8ec08cf6.js"></script>
@@ -187,7 +187,7 @@ carry query com.app.person name age
 </code></pre>
 <h2 id="what-is-carry"><a class="header" href="#what-is-carry">What is Carry?</a></h2>
 <p>Carry gives you a <strong>private, local-first data repository</strong> to which both you and your tools can read and write. Data lives on your machine, not in a cloud service. Carry provides a shared, durable place for your data to live.</p>
-<p>At its core, Carry stores data as <strong>claims</strong> – simple facts in the form <em>(the X of Y is Z)</em> – organized into domains and composable schemas. This structure is flexible enough to model anything from a personal profile to a recipe database, while remaining queryable and human-readable.</p>
+<p>At its core, Carry stores data as <strong>claims</strong> – simple statements in the form <em>(the X of Y is Z)</em> – organized into domains and composable schemas. This structure is flexible enough to model anything from a personal profile to a recipe database, while remaining queryable and human-readable.</p>
 <h2 id="key-properties"><a class="header" href="#key-properties">Key Properties</a></h2>
 <ul>
 <li><strong>Local-first.</strong> Your data lives on your machine. No cloud service holds your memory. Sync is optional and on your terms.</li>
@@ -415,7 +415,7 @@ carry query person name="Alice" --format triples | carry retract -
 <p>Carry stores everything on your filesystem in a <code>.carry/</code> directory. There’s no server, no account, no cloud dependency. You can back it up however you like, and delete it by removing a directory.</p>
 <p>Sync is optional. If you want it, you choose the remote – your own bucket, a peer, or a Tonk relay.</p>
 <h3 id="one-repository-every-tool"><a class="header" href="#one-repository-every-tool">One repository, every tool</a></h3>
-<p>Instead of maintaining parallel copies of your data in every tool’s proprietary format, Carry provides a single repository to which any tool can read and write. The same facts are available to a CLI script, an AI coding assistant, a custom agent, or anything else that can speak YAML.</p>
+<p>Instead of maintaining parallel copies of your data in every tool’s proprietary format, Carry provides a single repository to which any tool can read and write. The same claims are available to a CLI script, an AI coding assistant, a custom agent, or anything else that can speak YAML.</p>
 <h3 id="human-readable-means-machine-readable"><a class="header" href="#human-readable-means-machine-readable">Human-readable means machine-readable</a></h3>
 <p>Carry presents your data as YAML or JSON – <a href="#asserted-notation">asserted notation</a>. It looks like this:</p>
 <pre><code class="language-yaml">did:key:zAlice:
@@ -461,7 +461,7 @@ Rule            Logic that derives new concepts from existing data
 <h2 id="how-the-pieces-fit-together"><a class="header" href="#how-the-pieces-fit-together">How the Pieces Fit Together</a></h2>
 <ol>
 <li>
-<p>You <strong>assert claims</strong> – facts like “the name of Alice is Alice” – into a domain like <code>com.app.person</code>.</p>
+<p>You <strong>assert claims</strong> – like “the name of Alice is Alice” – into a domain like <code>com.app.person</code>.</p>
 </li>
 <li>
 <p>When patterns emerge, you define <strong>attributes</strong> that refine relations with types (<code>Text</code>, <code>UnsignedInteger</code>, etc.) and cardinality (<code>one</code> or <code>many</code>).</p>
@@ -1406,7 +1406,7 @@ diy.planner:
 <p>The command:</p>
 <ol>
 <li>Generates an Ed25519 keypair for the repository.</li>
-<li>Creates <code>.carry/&lt;did&gt;/</code> with a <code>credentials</code> file and <code>facts/</code> directory.</li>
+<li>Creates <code>.carry/&lt;did&gt;/</code> with a <code>credentials</code> file and <code>claims/</code> directory.</li>
 <li>Bootstraps the builtin concepts (<code>attribute</code>, <code>concept</code>, <code>bookmark</code>) so they can be used immediately.</li>
 <li>If <code>LABEL</code> is provided, asserts it as the repository label.</li>
 </ol>
@@ -1462,7 +1462,7 @@ carry init my-project --repo /path/to/project
 <pre><code>carry assert &lt;TARGET|FILE|-&gt; [this=&lt;ENTITY&gt;] [@name] [FIELD=VALUE ...] [--repo &lt;PATH&gt;] [--format &lt;FMT&gt;]
 </code></pre>
 <h2 id="description-1"><a class="header" href="#description-1">Description</a></h2>
-<p>Assert creates or updates claims. Claims are facts stored as <code>(the: relation, of: entity, is: value)</code>.</p>
+<p>Assert creates or updates claims. Claims are stored as <code>(the: relation, of: entity, is: value)</code>.</p>
 <h3 id="input-modes"><a class="header" href="#input-modes">Input Modes</a></h3>
 <div class="table-wrapper">
 <table>
@@ -2357,10 +2357,10 @@ is:  &lt;value&gt;         -- the value being associated
     @active                        # Plain text: DID of the active space
     did:key:zSpace1/
       credentials                  # 32-byte Ed25519 secret key (mode 0600)
-      facts/                       # Dialog DB storage (prolly trees)
+      claims/                       # Dialog DB storage (prolly trees)
     did:key:zSpace2/
       credentials
-      facts/
+      claims/
   src/
   ...
 </code></pre>
@@ -2370,7 +2370,7 @@ is:  &lt;value&gt;         -- the value being associated
 <p>A <strong>space</strong> is a subdirectory of <code>.carry/</code> named by its <code>did:key:z...</code> DID. Each space contains:</p>
 <ul>
 <li><strong>credentials</strong>: A 32-byte Ed25519 private key. The corresponding public key determines the space’s DID.</li>
-<li><strong>facts/</strong>: Dialog DB’s on-disk storage using prolly trees.</li>
+<li><strong>claims/</strong>: Dialog DB’s on-disk storage using prolly trees.</li>
 </ul>
 <p>The active space is tracked in <code>.carry/@active</code> as a plain text DID.</p>
 <h2 id="cryptographic-identity"><a class="header" href="#cryptographic-identity">Cryptographic Identity</a></h2>
