@@ -1,0 +1,2505 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Carry</title>
+        <meta name="robots" content="noindex">
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="Persistent, local-first memory for LLMs and humans">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="favicon-8114d1fc.png">
+        <link rel="stylesheet" href="css/variables-8adf115d.css">
+        <link rel="stylesheet" href="css/general-2459343d.css">
+        <link rel="stylesheet" href="css/chrome-ae938929.css">
+        <link rel="stylesheet" href="css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "searchindex-1a058eae.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc-8ec08cf6.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Carry</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/tonk-labs/carry" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="carry"><a class="header" href="#carry">Carry</a></h1>
+<p><strong>A local-first semantic database for humans and machines.</strong></p>
+<p>Carry is a CLI tool for working with <a href="#dialog-db">Dialog DB</a> – a local-first, semantic database designed for structured data that both people and machines can read, write, and reason about.</p>
+<pre><code>carry init my-project
+carry assert com.app.person name=Alice age=28
+carry query com.app.person name age
+</code></pre>
+<h2 id="what-is-carry"><a class="header" href="#what-is-carry">What is Carry?</a></h2>
+<p>Carry gives you a <strong>private, local-first data repository</strong> to which both you and your tools can read and write. Data lives on your machine, not in a cloud service. Carry provides a shared, durable place for your data to live.</p>
+<p>At its core, Carry stores data as <strong>claims</strong> – simple facts in the form <em>(the X of Y is Z)</em> – organized into domains and composable schemas. This structure is flexible enough to model anything from a personal profile to a recipe database, while remaining queryable and human-readable.</p>
+<h2 id="key-properties"><a class="header" href="#key-properties">Key Properties</a></h2>
+<ul>
+<li><strong>Local-first.</strong> Your data lives on your machine. No cloud service holds your memory. Sync is optional and on your terms.</li>
+<li><strong>Schema-on-read.</strong> You don’t need to design a schema before writing data. Define concepts when you need them, and Dialog interprets your data at query time.</li>
+<li><strong>Composable.</strong> Attributes combine into concepts. Concepts combine into rules. Rules derive new knowledge from existing data. Each layer builds on the one below.</li>
+</ul>
+<h2 id="who-is-carry-for"><a class="header" href="#who-is-carry-for">Who is Carry for?</a></h2>
+<ul>
+<li><strong>Developers using multiple AI tools</strong> who are tired of re-explaining context across Claude Code, Cursor, and others.</li>
+<li><strong>Data modelers</strong> who want a local and lightweight tool for defining and querying structured data without standing up a database server.</li>
+<li><strong>Anyone</strong> who wants to own their data, inspect it, and carry it with them.</li>
+</ul>
+<h2 id="whats-in-these-docs"><a class="header" href="#whats-in-these-docs">What’s in these docs?</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Section</th><th>What you’ll find</th></tr>
+</thead>
+<tbody>
+<tr><td><a href="#installation">Getting Started</a></td><td>Installation and first steps</td></tr>
+<tr><td><a href="#why-carry">Philosophy</a></td><td>Why Carry exists and what it believes</td></tr>
+<tr><td><a href="#core-concepts">Core Concepts</a></td><td>Claims, entities, domains, and asserted notation</td></tr>
+<tr><td><a href="#attributes">Domain Modeling</a></td><td>Defining attributes, concepts, and rules</td></tr>
+<tr><td><a href="#cli-reference">CLI Reference</a></td><td>Every command, flag, and option</td></tr>
+<tr><td><a href="#persistent-memory-for-ai-tools">Use Cases</a></td><td>Concrete examples of what to build with Carry</td></tr>
+<tr><td><a href="#dialog-db">Dialog DB</a></td><td>The database engine underneath</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="status"><a class="header" href="#status">Status</a></h2>
+<blockquote class="blockquote-tag blockquote-tag-caution">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M4.47.22A.749.749 0 0 1 5 0h6c.199 0 .389.079.53.22l4.25 4.25c.141.14.22.331.22.53v6a.749.749 0 0 1-.22.53l-4.25 4.25A.749.749 0 0 1 11 16H5a.749.749 0 0 1-.53-.22L.22 11.53A.749.749 0 0 1 0 11V5c0-.199.079-.389.22-.53Zm.84 1.28L1.5 5.31v5.38l3.81 3.81h5.38l3.81-3.81V5.31L10.69 1.5ZM8 4a.75.75 0 0 1 .75.75v3.5a.75.75 0 0 1-1.5 0v-3.5A.75.75 0 0 1 8 4Zm0 8a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Caution</p>
+<p>Carry is <strong>version 0.1</strong> and under active development. The CLI and data model are stabilizing, but expect rough edges. Dialog DB itself is experimental – binary encoding and index construction may change between releases without a migration path.</p>
+</blockquote>
+<p>That said, the data you write is yours. If the tooling changes, your data doesn’t disappear.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="installation"><a class="header" href="#installation">Installation</a></h1>
+<h2 id="quick-install-recommended"><a class="header" href="#quick-install-recommended">Quick Install (recommended)</a></h2>
+<p>The fastest way to install Carry is with the install script. It detects your platform, downloads the right binary, and installs shell completions automatically:</p>
+<pre><code class="language-bash">curl -fsSL https://raw.githubusercontent.com/tonk-labs/tonk/feat/carry/install.sh | sh
+</code></pre>
+<p>This installs the <code>carry</code> binary to <code>/usr/local/bin</code> (you may be prompted for your password) and sets up shell completions for your current shell (zsh, bash, or fish).</p>
+<p>It’s always good practice to inspect a script before running it on your machine. You can view it <a href="https://raw.githubusercontent.com/tonk-labs/tonk/feat/carry/install.sh">here</a>.</p>
+<h3 id="uninstall"><a class="header" href="#uninstall">Uninstall</a></h3>
+<p>To remove Carry and its shell completions:</p>
+<pre><code class="language-bash">curl -fsSL https://raw.githubusercontent.com/tonk-labs/tonk/feat/carry/install.sh | sh -s -- uninstall
+</code></pre>
+<h2 id="from-nix"><a class="header" href="#from-nix">From Nix</a></h2>
+<p>If you have <a href="https://nixos.org/">Nix</a> installed, you can build Carry from the Tonk flake:</p>
+<pre><code class="language-bash">nix build github:tonk-labs/tonk#carry
+</code></pre>
+<p>This produces a standalone binary at <code>./result/bin/carry</code>. Copy it to somewhere on your <code>$PATH</code>:</p>
+<pre><code class="language-bash">cp ./result/bin/carry ~/.local/bin/
+</code></pre>
+<h2 id="from-source"><a class="header" href="#from-source">From Source</a></h2>
+<p>Clone the repository and build with Cargo:</p>
+<pre><code class="language-bash">git clone https://github.com/tonk-labs/tonk.git
+cd tonk
+cargo build --release --package carry
+</code></pre>
+<p>The binary will be at <code>target/release/carry</code>.</p>
+<h3 id="using-the-nix-development-shell"><a class="header" href="#using-the-nix-development-shell">Using the Nix development shell</a></h3>
+<p>If you’re working on the Tonk codebase, the Nix flake provides a complete development environment:</p>
+<pre><code class="language-bash">cd tonk
+nix develop
+cargo build --package carry
+</code></pre>
+<h2 id="verify-installation"><a class="header" href="#verify-installation">Verify Installation</a></h2>
+<pre><code class="language-bash">carry --help
+</code></pre>
+<p>You should see the Carry help output describing available commands and key concepts.</p>
+<h2 id="shell-completions"><a class="header" href="#shell-completions">Shell Completions</a></h2>
+<p>The install script sets up shell completions automatically for zsh, bash, and fish. If you installed via another method, Carry supports completions via <code>clap_complete</code>. Generate them by running:</p>
+<pre><code class="language-bash">COMPLETE=zsh carry    # for zsh
+COMPLETE=bash carry   # for bash
+COMPLETE=fish carry   # for fish
+</code></pre>
+<p>Redirect the output to the appropriate completions directory for your shell.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="quick-start"><a class="header" href="#quick-start">Quick Start</a></h1>
+<p>This guide walks you through creating a repository, defining a schema, asserting data, and querying it – all in about five minutes.</p>
+<h2 id="1-initialize-a-repository"><a class="header" href="#1-initialize-a-repository">1. Initialize a Repository</a></h2>
+<pre><code class="language-bash">carry init my-project
+</code></pre>
+<p>Output:</p>
+<pre><code>Initialized my-project repository in /path/to/.carry/did:key:zAbc123
+</code></pre>
+<p>This creates a <code>.carry/</code> directory in your current working directory. Carry looks for a repository in the current directory first, then seeks through parent directories until it finds one. Repositories hold all the data created when using Carry.</p>
+<h2 id="2-assert-some-data"><a class="header" href="#2-assert-some-data">2. Assert Some Data</a></h2>
+<p>Let’s start with raw domain assertions – no schema needed:</p>
+<pre><code class="language-bash">carry assert com.app.person name=Alice age=28
+</code></pre>
+<p>Output:</p>
+<pre><code>did:key:zNewEntity123
+</code></pre>
+<p>The output is the DID of the newly created entity. Every piece of data in Carry is an entity with a globally unique, content-derived identity.</p>
+<p>Add another person:</p>
+<pre><code class="language-bash">carry assert com.app.person name=Bob age=35
+</code></pre>
+<h2 id="3-query-your-data"><a class="header" href="#3-query-your-data">3. Query Your Data</a></h2>
+<pre><code class="language-bash">carry query com.app.person name age
+</code></pre>
+<p>Output:</p>
+<pre><code class="language-yaml">did:key:zAlice123:
+  com.app.person:
+    name: Alice
+    age: 28
+
+did:key:zBob456:
+  com.app.person:
+    name: Bob
+    age: 35
+</code></pre>
+<p>Filter by a field value:</p>
+<pre><code class="language-bash">carry query com.app.person name="Alice" age
+</code></pre>
+<p>Output:</p>
+<pre><code class="language-yaml">did:key:zAlice123:
+  com.app.person:
+    name: Alice
+    age: 28
+</code></pre>
+<h2 id="4-define-a-schema"><a class="header" href="#4-define-a-schema">4. Define a Schema</a></h2>
+<p>Raw domain assertions work fine, but attributes and concepts give you reusable, named structures. Let’s define some:</p>
+<pre><code class="language-bash"># Define attributes
+carry assert attribute @person-name \
+  the=com.app.person/name as=Text cardinality=one \
+  description="Name of a person"
+
+carry assert attribute @person-age \
+  the=com.app.person/age as=UnsignedInteger cardinality=one \
+  description="Age of a person"
+
+# Define a concept grouping those attributes
+carry assert concept @person \
+  description="A person" \
+  with.name=person-name \
+  with.age=person-age
+</code></pre>
+<p>Now you can query using the concept name instead of the domain:</p>
+<pre><code class="language-bash">carry query person
+</code></pre>
+<p>Output:</p>
+<pre><code class="language-yaml">did:key:zAlice123:
+  person:
+    name: Alice
+    age: 28
+
+did:key:zBob456:
+  person:
+    name: Bob
+    age: 35
+</code></pre>
+<h2 id="5-use-a-yaml-file"><a class="header" href="#5-use-a-yaml-file">5. Use a YAML File</a></h2>
+<p>For anything beyond a few fields, YAML files are more convenient. Create a file called <code>schema.yaml</code>:</p>
+<pre><code class="language-yaml">task-title:
+  attribute:
+    description: Title of a task
+    the: com.app.task/title
+    as: Text
+    cardinality: one
+
+task-status:
+  attribute:
+    description: Current status
+    the: com.app.task/status
+    as: Text
+    cardinality: one
+
+task:
+  concept:
+    description: A task to be completed
+    with:
+      title: task-title
+      status: task-status
+</code></pre>
+<p>Assert it:</p>
+<pre><code class="language-bash">carry assert schema.yaml
+</code></pre>
+<p>Then add data:</p>
+<pre><code class="language-bash">carry assert task title="Write docs" status=in-progress
+carry assert task title="Ship v0.1" status=todo
+</code></pre>
+<p>Query:</p>
+<pre><code class="language-bash">carry query task
+</code></pre>
+<h2 id="6-update-and-retract"><a class="header" href="#6-update-and-retract">6. Update and Retract</a></h2>
+<p>Update an existing entity by passing <code>this=</code>:</p>
+<pre><code class="language-bash">carry assert task this=did:key:zTask1 status=done
+</code></pre>
+<p>Retract a field entirely:</p>
+<pre><code class="language-bash">carry retract task this=did:key:zTask1 status
+</code></pre>
+<h2 id="7-pipe-between-commands"><a class="header" href="#7-pipe-between-commands">7. Pipe Between Commands</a></h2>
+<p>Query output is valid input for assert and retract. This enables Unix-style composition:</p>
+<pre><code class="language-bash"># Copy data by piping query output back as assertions
+carry query person --format triples | carry assert -
+
+# Retract all matching data
+carry query person name="Alice" --format triples | carry retract -
+</code></pre>
+<h2 id="next-steps"><a class="header" href="#next-steps">Next Steps</a></h2>
+<ul>
+<li><a href="#core-concepts">Core Concepts</a> – understand claims, entities, and domains</li>
+<li><a href="#attributes">Domain Modeling</a> – define attributes, concepts, and rules</li>
+<li><a href="#cli-reference">CLI Reference</a> – every command and flag</li>
+<li>Use Cases:
+<ul>
+<li><a href="#persistent-memory-for-ai-tools">Persistent Memory for AI Tools</a> – shared context across Cursor, Claude, and others</li>
+<li><a href="#personal-knowledge-management">Personal Knowledge Management</a> – contacts, research notes, reading lists</li>
+<li><a href="#structured-data-modeling">Structured Data Modeling</a> – lightweight local database for any structured data</li>
+</ul>
+</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="why-carry"><a class="header" href="#why-carry">Why Carry</a></h1>
+<h2 id="the-problem"><a class="header" href="#the-problem">The Problem</a></h2>
+<p>Structured data tends to end up in one of two bad places: a cloud service you don’t control, or ad-hoc files you can’t query.</p>
+<p>Cloud services are convenient but fragile. Your data lives on someone else’s machine, under their terms, queryable only through their API. If they change the product or shut it down, your data is gone or locked in an export format. If the data is sensitive, you’ve handed it to a third party by design.</p>
+<p>Ad-hoc files – markdown notes, CSV exports, JSON dumps, per-tool config files like <code>.cursorrules</code> or <code>CLAUDE.md</code> – give you local control but sacrifice structure. They’re hard to query across, drift out of sync, can’t be written to by the tools that read them, and don’t scale as the amount of data grows.</p>
+<p>Neither option is good if you want data that is <strong>private, durable, structured, and accessible to the tools you use</strong>.</p>
+<h2 id="carrys-answer"><a class="header" href="#carrys-answer">Carry’s Answer</a></h2>
+<p>Carry starts from a few beliefs:</p>
+<h3 id="your-data-should-live-where-you-put-it"><a class="header" href="#your-data-should-live-where-you-put-it">Your data should live where you put it</a></h3>
+<p>Carry stores everything on your filesystem in a <code>.carry/</code> directory. There’s no server, no account, no cloud dependency. You can back it up however you like, and delete it by removing a directory.</p>
+<p>Sync is optional. If you want it, you choose the remote – your own bucket, a peer, or a Tonk relay.</p>
+<h3 id="one-repository-every-tool"><a class="header" href="#one-repository-every-tool">One repository, every tool</a></h3>
+<p>Instead of maintaining parallel copies of your data in every tool’s proprietary format, Carry provides a single repository to which any tool can read and write. The same facts are available to a CLI script, an AI coding assistant, a custom agent, or anything else that can speak YAML.</p>
+<h3 id="human-readable-means-machine-readable"><a class="header" href="#human-readable-means-machine-readable">Human-readable means machine-readable</a></h3>
+<p>Carry presents your data as YAML or JSON – <a href="#asserted-notation">asserted notation</a>. It looks like this:</p>
+<pre><code class="language-yaml">did:key:zAlice:
+  com.app.person:
+    name: Alice
+    age: 28
+</code></pre>
+<p>There’s no binary blob to decode, no proprietary format to reverse-engineer. If you can read YAML, you can read your data. Any tool that can read YAML can read your data too. The same format is used for query output and data input, so piping between commands works naturally:</p>
+<pre><code class="language-bash">carry query person --format triples | carry assert -
+</code></pre>
+<h3 id="structure-should-be-earned-not-imposed"><a class="header" href="#structure-should-be-earned-not-imposed">Structure should be earned, not imposed</a></h3>
+<p>Many databases force you to define a schema before you can write anything. Carry inverts this. You can start by asserting raw claims in any domain you like:</p>
+<pre><code class="language-bash">carry assert com.my.notes title="Meeting notes" date="2026-03-18"
+</code></pre>
+<p>Later, when patterns emerge, you can define <a href="#attributes">attributes</a> and <a href="#concepts">concepts</a> to give your data structure. Dialog DB interprets schemas at read time, not write time. This means your data model can evolve without migrations.</p>
+<h3 id="attribution-matters"><a class="header" href="#attribution-matters">Attribution matters</a></h3>
+<p>Each repository has its own cryptographic identity, providing a foundation for knowing who contributed what. By using separate repositories for different tools, agents, or collaborators, you can keep contributions isolated.</p>
+<p>Knowing the provenance of data matters whether the source is a person, a script, or an AI agent. Per-claim attribution (tracking who made each individual claim and when) is a planned feature.</p>
+<h2 id="what-carry-is-not"><a class="header" href="#what-carry-is-not">What Carry Is Not</a></h2>
+<ul>
+<li><strong>Not a replacement for your tools.</strong> Carry doesn’t compete with Cursor, Claude, Obsidian, or any application you use. It gives them a shared, durable place to read and write structured data.</li>
+<li><strong>Not an application layer.</strong> Carry is the store and the protocol to access it. What you build on top is up to you.</li>
+<li><strong>Not mandatory cloud.</strong> Local-only is a first-class path.</li>
+<li><strong>Not a high-throughput database.</strong> Carry works well for hundreds to thousands of entities. It’s not designed for large-scale analytics or concurrent multi-user writes (sync is still developing).</li>
+</ul>
+<h2 id="the-bigger-picture"><a class="header" href="#the-bigger-picture">The Bigger Picture</a></h2>
+<p>Carry is built by <a href="https://tonk.xyz">Tonk</a>. The long-term vision is a world where your data is truly yours, where tools interoperate on your terms, and where the structure of your information is something you define and control, not something imposed by a vendor.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="core-concepts"><a class="header" href="#core-concepts">Core Concepts</a></h1>
+<p>Carry organizes data using a small set of composable primitives. Understanding these will help you make sense of everything else in the documentation.</p>
+<h2 id="the-data-model-at-a-glance"><a class="header" href="#the-data-model-at-a-glance">The Data Model at a Glance</a></h2>
+<pre><code>Claim           The atomic unit: "the X of Y is Z"
+  Entity        Anything with an identity (a DID)
+  Relation      What kind of association: domain/name
+  Value         The data: text, numbers, booleans, references to other entities
+
+Domain          A namespace that groups related relations
+Attribute       A relation with type and cardinality constraints
+Concept         A reusable schema: a named group of attributes
+Rule            Logic that derives new concepts from existing data
+</code></pre>
+<p>Everything in Carry reduces to <strong>claims</strong>. Schemas, concepts, and rules are themselves stored as claims. The system is self-describing.</p>
+<h2 id="how-the-pieces-fit-together"><a class="header" href="#how-the-pieces-fit-together">How the Pieces Fit Together</a></h2>
+<ol>
+<li>
+<p>You <strong>assert claims</strong> – facts like “the name of Alice is Alice” – into a domain like <code>com.app.person</code>.</p>
+</li>
+<li>
+<p>When patterns emerge, you define <strong>attributes</strong> that refine relations with types (<code>Text</code>, <code>UnsignedInteger</code>, etc.) and cardinality (<code>one</code> or <code>many</code>).</p>
+</li>
+<li>
+<p>You compose attributes into <strong>concepts</strong> – named schemas like “person” that group related attributes together.</p>
+</li>
+<li>
+<p>You write <strong>rules</strong> that derive new concept instances from existing data, like “a safe meal is one where no attendee has an allergy to any ingredient.”</p>
+</li>
+<li>
+<p>All of this lives in a <code>.carry/</code> repository with its own cryptographic identity.</p>
+</li>
+</ol>
+<p>Each of these is explained in its own section:</p>
+<ul>
+<li><a href="#claims-and-entities">Claims and Entities</a></li>
+<li><a href="#domains">Domains</a></li>
+<li><a href="#asserted-notation">Asserted Notation</a></li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="claims-and-entities"><a class="header" href="#claims-and-entities">Claims and Entities</a></h1>
+<h2 id="claims"><a class="header" href="#claims">Claims</a></h2>
+<p>A <strong>claim</strong> is the atomic unit of data in Carry. Every claim is a triple:</p>
+<pre><code>(the: relation, of: entity, is: value)
+</code></pre>
+<p>For example:</p>
+<pre><code class="language-yaml">- the: com.app.person/name
+  of:  did:key:zAlice
+  is:  Alice
+</code></pre>
+<p>This says: “the <code>com.app.person/name</code> of the entity <code>did:key:zAlice</code> is <code>Alice</code>.”</p>
+<p>When you retract a claim, it is removed from the indexes and no longer appears in query results. Each claim records a <code>Cause</code> link to its predecessor for basic provenance. A full temporal index preserving complete assertion/retraction history is planned but not yet implemented.</p>
+<h3 id="claim-components"><a class="header" href="#claim-components">Claim Components</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Component</th><th>What it is</th><th>Example</th></tr>
+</thead>
+<tbody>
+<tr><td><code>the</code></td><td>The relation – identifies the kind of association. Composed of <code>domain/name</code>.</td><td><code>com.app.person/name</code></td></tr>
+<tr><td><code>of</code></td><td>The entity this claim is about. Always a DID.</td><td><code>did:key:zAlice</code></td></tr>
+<tr><td><code>is</code></td><td>The value being associated. Can be a scalar or a reference to another entity.</td><td><code>Alice</code></td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="entities"><a class="header" href="#entities">Entities</a></h2>
+<p>An <strong>entity</strong> is anything with an identity. In Carry, entities are identified by <a href="https://www.w3.org/TR/did-core/">DIDs</a> (Decentralized Identifiers) in <code>did:key:z...</code> format.</p>
+<p>Entities are not defined explicitly – they come into existence when claims are asserted about them. An entity is simply the set of claims that reference it.</p>
+<h3 id="entity-identity"><a class="header" href="#entity-identity">Entity Identity</a></h3>
+<p>When you create a new entity via <code>carry assert</code>, its DID is derived <strong>deterministically</strong> from its content:</p>
+<ol>
+<li>The field values are sorted and hashed with BLAKE3.</li>
+<li>The hash is used as an Ed25519 signing key seed.</li>
+<li>The public key is encoded as a <code>did:key:z...</code>.</li>
+</ol>
+<p>This means that asserting the same data twice produces the same entity DID. Identity is content-derived, not randomly assigned.</p>
+<pre><code class="language-bash"># Both produce the same entity DID because the content is identical:
+carry assert com.app.person name=Alice age=28
+carry assert com.app.person name=Alice age=28
+</code></pre>
+<h3 id="explicit-entity-targeting"><a class="header" href="#explicit-entity-targeting">Explicit Entity Targeting</a></h3>
+<p>You can target an existing entity with <code>this=</code>:</p>
+<pre><code class="language-bash"># Update Alice's age
+carry assert com.app.person this=did:key:zAlice age=29
+</code></pre>
+<h3 id="named-entities-bookmarks"><a class="header" href="#named-entities-bookmarks">Named Entities (Bookmarks)</a></h3>
+<p>Entities can be given human-readable names using the <code>@name</code> syntax:</p>
+<pre><code class="language-bash">carry assert attribute @person-name \
+  the=com.app.person/name as=Text cardinality=one
+</code></pre>
+<p>The <code>@person-name</code> asserts <code>dialog.meta/name</code> on the entity, creating a bookmark. You can then reference this entity by name in other commands:</p>
+<pre><code class="language-bash">carry assert concept @person with.name=person-name
+</code></pre>
+<p>Names are shared across the repository and travel with synced data.</p>
+<h2 id="value-types"><a class="header" href="#value-types">Value Types</a></h2>
+<p>Claims support the following value types:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Type</th><th>Description</th><th>Example</th></tr>
+</thead>
+<tbody>
+<tr><td><code>Text</code></td><td>UTF-8 string</td><td><code>"Alice"</code></td></tr>
+<tr><td><code>UnsignedInteger</code></td><td>Non-negative integer</td><td><code>28</code></td></tr>
+<tr><td><code>SignedInteger</code></td><td>Signed integer</td><td><code>-5</code></td></tr>
+<tr><td><code>Float</code></td><td>Floating-point number</td><td><code>3.14</code></td></tr>
+<tr><td><code>Boolean</code></td><td>True or false</td><td><code>true</code></td></tr>
+<tr><td><code>Symbol</code></td><td>A namespaced symbol</td><td><code>carry.profile/work</code></td></tr>
+<tr><td><code>Entity</code></td><td>Reference to another entity (a DID)</td><td><code>did:key:zAlice</code></td></tr>
+<tr><td><code>Bytes</code></td><td>Raw bytes</td><td><em>(binary data)</em></td></tr>
+</tbody>
+</table>
+</div>
+<p>When asserting values via the CLI, Carry auto-detects the type: DIDs are recognized as entity references, numbers as integers or floats, <code>true</code>/<code>false</code> as booleans, and everything else as strings.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="domains"><a class="header" href="#domains">Domains</a></h1>
+<p>A <strong>domain</strong> is a namespace for grouping related relations. Domains use reverse-DNS notation, similar to Java package names or Android app identifiers.</p>
+<h2 id="naming-convention"><a class="header" href="#naming-convention">Naming Convention</a></h2>
+<pre><code>com.myapp.person
+diy.cook
+xyz.tonk.carry
+</code></pre>
+<p>Each relation is qualified by its domain:</p>
+<pre><code>com.app.person/name     -- the "name" relation in the "com.app.person" domain
+com.app.person/age      -- the "age" relation in the same domain
+diy.cook/quantity       -- the "quantity" relation in the "diy.cook" domain
+</code></pre>
+<h2 id="reserved-domains"><a class="header" href="#reserved-domains">Reserved Domains</a></h2>
+<p>Domains starting with <code>dialog.</code> are reserved for Dialog DB internals:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Domain</th><th>Purpose</th></tr>
+</thead>
+<tbody>
+<tr><td><code>dialog.attribute</code></td><td>Stores attribute identity fields (<code>/id</code>, <code>/type</code>, <code>/cardinality</code>)</td></tr>
+<tr><td><code>dialog.concept.with</code></td><td>Stores required concept membership by field name</td></tr>
+<tr><td><code>dialog.concept.maybe</code></td><td>Stores optional concept membership by field name</td></tr>
+<tr><td><code>dialog.meta</code></td><td>Universal metadata: <code>/name</code> and <code>/description</code> for any entity</td></tr>
+</tbody>
+</table>
+</div>
+<p>Do not assert claims into <code>dialog.*</code> domains directly. Carry manages these when you use <code>carry assert attribute</code>, <code>carry assert concept</code>, etc.</p>
+<p>The <code>xyz.tonk.carry</code> domain is used by Carry itself for repository-level metadata like labels and settings.</p>
+<h2 id="using-domains"><a class="header" href="#using-domains">Using Domains</a></h2>
+<h3 id="in-commands"><a class="header" href="#in-commands">In Commands</a></h3>
+<p>When a target in <code>carry assert</code> or <code>carry query</code> contains a <code>.</code>, it’s treated as a domain:</p>
+<pre><code class="language-bash"># Assert into a domain
+carry assert com.app.person name=Alice age=28
+
+# Query from a domain
+carry query com.app.person name age
+</code></pre>
+<h3 id="in-yaml-files"><a class="header" href="#in-yaml-files">In YAML Files</a></h3>
+<p>Domains appear as the second level in <a href="#asserted-notation">asserted notation</a>:</p>
+<pre><code class="language-yaml">did:key:zAlice:
+  com.app.person:
+    name: Alice
+    age: 28
+</code></pre>
+<h3 id="choosing-domain-names"><a class="header" href="#choosing-domain-names">Choosing Domain Names</a></h3>
+<p>Pick a domain name that represents your use case or organization:</p>
+<ul>
+<li><code>com.mycompany.project</code> – for company or project data</li>
+<li><code>me.myname.notes</code> – for personal data</li>
+<li><code>diy.recipes</code> – for hobby projects</li>
+</ul>
+<p>The domain name itself has no special meaning to Carry beyond namespacing. Two claims with the same field name but different domains are completely independent.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="asserted-notation"><a class="header" href="#asserted-notation">Asserted Notation</a></h1>
+<p>Asserted notation is the canonical YAML format that Carry uses for command output and file-based input. It represents data as a three-level hierarchy that expands unambiguously to a set of raw claims.</p>
+<p>Because <code>carry query</code> output and <code>carry assert -</code> input share the same format, you can pipe query output directly back as input without any transformation.</p>
+<h2 id="three-level-structure"><a class="header" href="#three-level-structure">Three-Level Structure</a></h2>
+<p>Every entry in asserted notation follows:</p>
+<pre><code class="language-yaml">&lt;entity-identifier&gt;:
+  &lt;context&gt;:
+    &lt;field&gt;: &lt;value&gt;
+</code></pre>
+<h3 id="level-1-entity-identifier"><a class="header" href="#level-1-entity-identifier">Level 1: Entity Identifier</a></h3>
+<p>The outermost key identifies the entity being described.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Form</th><th>Meaning</th><th>Example</th></tr>
+</thead>
+<tbody>
+<tr><td>Contains <code>:</code></td><td>Global identifier (a DID or URI)</td><td><code>did:key:zAlice</code></td></tr>
+<tr><td>No <code>:</code></td><td>Local bookmark name</td><td><code>quantity</code>, <code>person</code></td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="level-2-context"><a class="header" href="#level-2-context">Level 2: Context</a></h3>
+<p>The second key declares how the fields beneath it should be interpreted.</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Form</th><th>Meaning</th><th>Example</th></tr>
+</thead>
+<tbody>
+<tr><td>Contains <code>.</code></td><td>Domain context – fields expand to <code>domain/field</code> relation identifiers</td><td><code>com.app.person</code></td></tr>
+<tr><td>No <code>.</code></td><td>Concept context – fields are named attributes of that concept</td><td><code>attribute</code>, <code>concept</code>, <code>bookmark</code></td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="level-3-fields"><a class="header" href="#level-3-fields">Level 3: Fields</a></h3>
+<p>Named values within the context.</p>
+<ul>
+<li><strong>Scalar value</strong>: A direct association – <code>name: Alice</code>, <code>age: 28</code></li>
+<li><strong>Non-scalar value</strong> (a nested YAML map): Implies a nested entity</li>
+</ul>
+<h2 id="data-assertions-domain-context"><a class="header" href="#data-assertions-domain-context">Data Assertions (Domain Context)</a></h2>
+<p>Under a domain context, each field expands to a claim:</p>
+<pre><code class="language-yaml">did:key:zAlice:
+  com.app.person:
+    name: Alice
+    age: 28
+</code></pre>
+<p>Expands to:</p>
+<pre><code class="language-yaml">- the: com.app.person/name
+  of:  did:key:zAlice
+  is:  Alice
+
+- the: com.app.person/age
+  of:  did:key:zAlice
+  is:  28
+</code></pre>
+<h2 id="schema-definitions-concept-context"><a class="header" href="#schema-definitions-concept-context">Schema Definitions (Concept Context)</a></h2>
+<p>Under a concept context, the pre-registered concept schema determines how fields are interpreted. See <a href="#attributes">Attributes</a> and <a href="#concepts">Concepts</a> for details.</p>
+<pre><code class="language-yaml">person-name:
+  attribute:
+    description: The person's name
+    the: com.app.person/name
+    as: Text
+    cardinality: one
+</code></pre>
+<h2 id="anonymous-entities"><a class="header" href="#anonymous-entities">Anonymous Entities</a></h2>
+<p>Use <code>_</code> as the entity identifier when you don’t care about the identity:</p>
+<pre><code class="language-yaml">_:
+  diy.cook:
+    quantity: 2
+    ingredient: carrot
+</code></pre>
+<p>Each <code>_</code> creates a fresh entity. If you need to reference the same anonymous entity in multiple places within one document, use a named variable like <code>?foo</code>:</p>
+<pre><code class="language-yaml">?meal:
+  diy.planner:
+    attendee: ?person
+    recipe: ?recipe
+</code></pre>
+<p>All occurrences of <code>?foo</code> in the same document bind to the same generated entity.</p>
+<h2 id="nested-entities"><a class="header" href="#nested-entities">Nested Entities</a></h2>
+<p>A non-scalar value under a domain context implies a nested entity:</p>
+<pre><code class="language-yaml">did:key:zAlice:
+  com.app.person:
+    name: Alice
+    address:
+      city: San Francisco
+      zip: 94107
+</code></pre>
+<p>Expands to:</p>
+<pre><code class="language-yaml">- the: com.app.person/name
+  of:  did:key:zAlice
+  is:  Alice
+
+- the: com.app.person/address
+  of:  did:key:zAlice
+  is:  &lt;address-entity&gt;
+
+- the: com.app.address/city
+  of:  &lt;address-entity&gt;
+  is:  San Francisco
+
+- the: com.app.address/zip
+  of:  &lt;address-entity&gt;
+  is:  94107
+</code></pre>
+<p>The nested entity’s domain is derived from the parent domain with the field name appended as a segment.</p>
+<h2 id="eav-triple-format"><a class="header" href="#eav-triple-format">EAV Triple Format</a></h2>
+<p>For piping between commands, Carry also supports a flat triple format via <code>--format triples</code>:</p>
+<pre><code class="language-yaml">- the: com.app.person/name
+  of: did:key:zAlice
+  is: Alice
+- the: com.app.person/age
+  of: did:key:zAlice
+  is: 28
+</code></pre>
+<p>This format is accepted by both <code>carry assert -</code> and <code>carry retract -</code>.</p>
+<h2 id="json"><a class="header" href="#json">JSON</a></h2>
+<p>JSON is supported as a structural equivalent to YAML. The same three-level hierarchy applies:</p>
+<pre><code class="language-json">{
+  "did:key:zAlice": {
+    "com.app.person": {
+      "name": "Alice",
+      "age": 28
+    }
+  }
+}
+</code></pre>
+<p>EAV triples in JSON:</p>
+<pre><code class="language-json">[
+  {"the": "com.app.person/name", "of": "did:key:zAlice", "is": "Alice"},
+  {"the": "com.app.person/age", "of": "did:key:zAlice", "is": 28}
+]
+</code></pre>
+<h2 id="round-trip-property"><a class="header" href="#round-trip-property">Round-Trip Property</a></h2>
+<p>Because query output is asserted notation and assert accepts it, the following always works:</p>
+<pre><code class="language-bash">carry query person name="Alice" | carry assert -
+carry query person --format triples | carry retract -
+</code></pre>
+<p>This makes Carry composable in the Unix tradition: commands produce output that other commands can consume.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="attributes"><a class="header" href="#attributes">Attributes</a></h1>
+<p>An <strong>attribute</strong> is a relation elevated with type and cardinality constraints. Where a raw claim like <code>com.app.person/name</code> just associates a value with an entity, an attribute says: “this relation accepts <code>Text</code> values and each entity has exactly <code>one</code>.”</p>
+<p>Attributes are the building blocks of <a href="#concepts">concepts</a>.</p>
+<h2 id="defining-attributes"><a class="header" href="#defining-attributes">Defining Attributes</a></h2>
+<h3 id="via-the-cli"><a class="header" href="#via-the-cli">Via the CLI</a></h3>
+<pre><code class="language-bash">carry assert attribute @person-name \
+  the=com.app.person/name \
+  as=Text \
+  cardinality=one \
+  description="Name of a person"
+</code></pre>
+<p>The <code>@person-name</code> creates a bookmark so you can reference this attribute by name later.</p>
+<h3 id="via-yaml"><a class="header" href="#via-yaml">Via YAML</a></h3>
+<pre><code class="language-yaml">person-name:
+  attribute:
+    description: Name of a person
+    the: com.app.person/name
+    as: Text
+    cardinality: one
+</code></pre>
+<p>The top-level key (<code>person-name</code>) becomes the bookmark name.</p>
+<h2 id="attribute-fields"><a class="header" href="#attribute-fields">Attribute Fields</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Field</th><th>Required</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>the</code></td><td>Yes</td><td>The relation identifier – <code>domain/name</code> format</td></tr>
+<tr><td><code>as</code></td><td>Yes</td><td>The value type (see below)</td></tr>
+<tr><td><code>cardinality</code></td><td>No</td><td><code>one</code> (default) or <code>many</code></td></tr>
+<tr><td><code>description</code></td><td>Yes</td><td>Human-readable description</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="value-types-1"><a class="header" href="#value-types-1">Value Types</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Type</th><th>Description</th><th>Example Values</th></tr>
+</thead>
+<tbody>
+<tr><td><code>Text</code></td><td>UTF-8 string</td><td><code>"Alice"</code>, <code>"hello world"</code></td></tr>
+<tr><td><code>UnsignedInteger</code></td><td>Non-negative integer</td><td><code>0</code>, <code>28</code>, <code>1000</code></td></tr>
+<tr><td><code>SignedInteger</code></td><td>Signed integer</td><td><code>-5</code>, <code>0</code>, <code>42</code></td></tr>
+<tr><td><code>Float</code></td><td>Floating-point number</td><td><code>3.14</code>, <code>-0.5</code></td></tr>
+<tr><td><code>Boolean</code></td><td>True or false</td><td><code>true</code>, <code>false</code></td></tr>
+<tr><td><code>Symbol</code></td><td>A namespaced constant</td><td><code>carry.profile/work</code></td></tr>
+<tr><td><code>Entity</code></td><td>Reference to another entity</td><td><code>did:key:z...</code></td></tr>
+<tr><td><code>Bytes</code></td><td>Raw binary data</td><td><em>(binary)</em></td></tr>
+</tbody>
+</table>
+</div>
+<p>You can also specify an <strong>enumeration</strong> of allowed symbols:</p>
+<pre><code class="language-yaml">task-status:
+  attribute:
+    description: Current status of a task
+    the: com.app.task/status
+    as: [":todo", ":in-progress", ":done"]
+    cardinality: one
+</code></pre>
+<h2 id="cardinality"><a class="header" href="#cardinality">Cardinality</a></h2>
+<ul>
+<li><code>one</code> – Each entity has at most one value for this attribute. Asserting a new value replaces the old one.</li>
+<li><code>many</code> – Each entity can have multiple values. Asserting adds to the set; retracting a specific value removes it.</li>
+</ul>
+<pre><code class="language-yaml"># A person has one name
+person-name:
+  attribute:
+    description: Name
+    the: com.app.person/name
+    as: Text
+    cardinality: one
+
+# A recipe can have many ingredients
+recipe-ingredient:
+  attribute:
+    description: An ingredient in the recipe
+    the: diy.cook/ingredient
+    as: Entity
+    cardinality: many
+</code></pre>
+<h2 id="attribute-identity"><a class="header" href="#attribute-identity">Attribute Identity</a></h2>
+<p>Two attributes with the same relation identifier (<code>the</code>) but different type or cardinality are <strong>distinct entities</strong>. The attribute’s DID is derived from the hash of <code>(relation_id, type, cardinality)</code>. The description does not affect identity.</p>
+<p>This means you can have, for example, both a <code>Text</code> version and an <code>Entity</code> version of the same relation, and they will be treated as different attributes.</p>
+<h2 id="querying-attributes"><a class="header" href="#querying-attributes">Querying Attributes</a></h2>
+<pre><code class="language-bash"># List all defined attributes
+carry query attribute
+
+# Find a specific attribute by name
+carry query attribute the=com.app.person/name
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="concepts"><a class="header" href="#concepts">Concepts</a></h1>
+<p>A <strong>concept</strong> is a composition of <a href="#attributes">attributes</a> that describes the shape of a thing. Think of it as a lightweight, named schema – like a type or class, but realized through schema-on-read rather than schema-on-write.</p>
+<p>Concepts are the primary unit of domain modeling in Carry.</p>
+<h2 id="defining-concepts"><a class="header" href="#defining-concepts">Defining Concepts</a></h2>
+<h3 id="via-the-cli-1"><a class="header" href="#via-the-cli-1">Via the CLI</a></h3>
+<p>First define the attributes, then compose them into a concept:</p>
+<pre><code class="language-bash"># Define attributes
+carry assert attribute @person-name \
+  the=com.app.person/name as=Text cardinality=one \
+  description="Name of a person"
+
+carry assert attribute @person-age \
+  the=com.app.person/age as=UnsignedInteger cardinality=one \
+  description="Age of a person"
+
+# Compose into a concept
+carry assert concept @person \
+  description="A person" \
+  with.name=person-name \
+  with.age=person-age
+</code></pre>
+<p>The <code>with.name=person-name</code> means: “the field called <code>name</code> in this concept uses the <code>person-name</code> attribute.” The left side of <code>=</code> is the field name; the right side is the attribute bookmark.</p>
+<h3 id="via-yaml-separate-definitions"><a class="header" href="#via-yaml-separate-definitions">Via YAML (Separate Definitions)</a></h3>
+<pre><code class="language-yaml">person-name:
+  attribute:
+    description: Name of a person
+    the: com.app.person/name
+    as: Text
+    cardinality: one
+
+person-age:
+  attribute:
+    description: Age of a person
+    the: com.app.person/age
+    as: UnsignedInteger
+    cardinality: one
+
+person:
+  concept:
+    description: A person
+    with:
+      name: person-name
+      age: person-age
+</code></pre>
+<h3 id="via-yaml-inline-attributes"><a class="header" href="#via-yaml-inline-attributes">Via YAML (Inline Attributes)</a></h3>
+<p>For convenience, you can define attributes inline within a concept:</p>
+<pre><code class="language-yaml">person:
+  concept:
+    description: A person
+    with:
+      name:
+        description: Name of a person
+        the: com.app.person/name
+        as: Text
+        cardinality: one
+      age:
+        description: Age of a person
+        the: com.app.person/age
+        as: UnsignedInteger
+        cardinality: one
+</code></pre>
+<p>Both forms produce identical claims.</p>
+<h2 id="required-vs-optional-fields"><a class="header" href="#required-vs-optional-fields">Required vs. Optional Fields</a></h2>
+<p>Concepts distinguish between <strong>required</strong> fields (<code>with</code>) and <strong>optional</strong> fields (<code>maybe</code>):</p>
+<pre><code class="language-yaml">task:
+  concept:
+    description: A task to be completed
+    with:
+      title:
+        description: Title of the task
+        the: com.app.task/title
+        as: Text
+      status:
+        description: Current status
+        the: com.app.task/status
+        as: [":todo", ":in-progress", ":done"]
+    maybe:
+      priority:
+        description: Priority level
+        the: com.app.task/priority
+        as: [":low", ":medium", ":high"]
+</code></pre>
+<p>An entity matches a concept if all <code>with</code> fields are present, regardless of which <code>maybe</code> fields exist. Optional fields are included in query output when present but don’t affect concept membership.</p>
+<h2 id="concept-identity"><a class="header" href="#concept-identity">Concept Identity</a></h2>
+<p>A concept’s identity is derived from its complete set of required fields – the <code>(field_name, attribute_entity)</code> pairs. Both the field names and the attributes they point to participate in identity:</p>
+<ul>
+<li>A concept with a field named <code>name</code> pointing at attribute <code>A</code> is <strong>distinct</strong> from one with a field named <code>fullname</code> pointing at the same attribute <code>A</code>.</li>
+<li>Optional fields (<code>maybe</code>) do <strong>not</strong> participate in concept identity.</li>
+</ul>
+<h2 id="using-concepts"><a class="header" href="#using-concepts">Using Concepts</a></h2>
+<h3 id="assert-data-against-a-concept"><a class="header" href="#assert-data-against-a-concept">Assert Data Against a Concept</a></h3>
+<pre><code class="language-bash">carry assert person name=Alice age=28
+</code></pre>
+<p>Fields are validated against the concept’s schema. If a required field is missing or a value doesn’t match the expected type, the assertion is rejected.</p>
+<h3 id="query-by-concept"><a class="header" href="#query-by-concept">Query by Concept</a></h3>
+<pre><code class="language-bash">carry query person
+carry query person name="Alice"
+</code></pre>
+<p>Concept queries return all fields defined by the concept (both <code>with</code> and <code>maybe</code>), unlike domain queries where you must explicitly request each field.</p>
+<h3 id="concept-queries-vs-domain-queries"><a class="header" href="#concept-queries-vs-domain-queries">Concept Queries vs. Domain Queries</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th></th><th>Domain Query</th><th>Concept Query</th></tr>
+</thead>
+<tbody>
+<tr><td>Target</td><td><code>com.app.person</code> (contains <code>.</code>)</td><td><code>person</code> (no <code>.</code>)</td></tr>
+<tr><td>Fields returned</td><td>Only those you request</td><td>All fields the concept defines</td></tr>
+<tr><td>Schema validation</td><td>None</td><td>Validated against concept</td></tr>
+<tr><td>Requires schema</td><td>No</td><td>Yes (concept must be defined)</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="referencing-attributes"><a class="header" href="#referencing-attributes">Referencing Attributes</a></h2>
+<p>In the CLI, <code>with.&lt;field&gt;=&lt;value&gt;</code> can reference attributes in two ways:</p>
+<ul>
+<li><strong>By bookmark name</strong>: <code>with.name=person-name</code> – looks up the attribute by its <code>dialog.meta/name</code>.</li>
+<li><strong>By selector</strong>: <code>with.name=com.app.person/name</code> – looks up (or auto-creates) the attribute by its relation identifier. If the value contains <code>/</code>, it’s treated as a selector.</li>
+</ul>
+<h2 id="querying-concept-definitions"><a class="header" href="#querying-concept-definitions">Querying Concept Definitions</a></h2>
+<pre><code class="language-bash"># List all defined concepts
+carry query concept
+
+# Show a specific concept
+carry query concept description
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="rules"><a class="header" href="#rules">Rules</a></h1>
+<p>A <strong>rule</strong> derives new concept instances from existing data. Rules are Carry’s mechanism for logic and inference – they let you express constraints, joins, and derived views without writing application code.</p>
+<p>Rules are evaluated at query time by the semantic layer, not stored as materialized views. They are declarative: you describe <em>what</em> should be true, and Dialog figures out <em>how</em> to compute it.</p>
+<h2 id="structure-of-a-rule"><a class="header" href="#structure-of-a-rule">Structure of a Rule</a></h2>
+<p>A rule has three parts:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Part</th><th>Required</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>deduce</code></td><td>Yes</td><td>The concept being derived – what the rule produces</td></tr>
+<tr><td><code>when</code></td><td>Yes</td><td>Positive premises – conditions that must hold</td></tr>
+<tr><td><code>unless</code></td><td>No</td><td>Negative premises – conditions that must NOT hold</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="example-finding-allergy-conflicts"><a class="header" href="#example-finding-allergy-conflicts">Example: Finding Allergy Conflicts</a></h2>
+<p>Given a cooking domain with recipes and ingredients, and a health domain with allergies, you can write a rule that finds conflicts:</p>
+<pre><code class="language-yaml">diy.planner:
+  find-allergy-conflicts:
+    description: Find conflicts between recipe ingredients and allergies
+    deduce:
+      AllergyConflict:
+        person: ?person
+        recipe: ?recipe
+    when:
+      - diy.cook/Recipe:
+          this: ?recipe
+          ingredient: ?ingredient
+      - diy.cook/Ingredient:
+          this: ?ingredient
+          name: ?substance
+      - diy.health/Allergy:
+          this: ?this
+          person: ?person
+          substance: ?substance
+    unless: []
+</code></pre>
+<p>This rule says: “An <code>AllergyConflict</code> exists when a recipe contains an ingredient whose name matches a substance someone is allergic to.” The <code>?variables</code> unify across premises – <code>?substance</code> must be the same value in both the <code>Ingredient</code> and <code>Allergy</code> matches.</p>
+<h2 id="example-safe-meals"><a class="header" href="#example-safe-meals">Example: Safe Meals</a></h2>
+<p>Building on the allergy conflict rule, you can define meals that respect dietary restrictions:</p>
+<pre><code class="language-yaml">diy.planner:
+  respect-dietary-restrictions:
+    description: A meal that respects dietary restrictions
+    deduce:
+      Meal:
+        attendee: ?person
+        recipe: ?recipe
+        occasion: ?occasion
+    when:
+      - diy.planner/Meal:
+          this: ?this
+          attendee: ?person
+          recipe: ?recipe
+          occasion: ?occasion
+    unless:
+      - diy.planner/AllergyConflict:
+          person: ?person
+          recipe: ?recipe
+</code></pre>
+<p>This rule says: “A meal is safe if it’s a planned meal AND there is no allergy conflict between the attendee and the recipe.” The <code>unless</code> clause acts as negation.</p>
+<h2 id="variables"><a class="header" href="#variables">Variables</a></h2>
+<p>Variables in rules start with <code>?</code> and unify by name across all <code>when</code> and <code>unless</code> clauses:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Variable</th><th>Meaning</th></tr>
+</thead>
+<tbody>
+<tr><td><code>?this</code></td><td>Binds to the entity being matched or derived</td></tr>
+<tr><td><code>?person</code></td><td>User-defined variable; unifies across premises</td></tr>
+<tr><td><code>?recipe</code></td><td>User-defined variable; unifies across premises</td></tr>
+</tbody>
+</table>
+</div>
+<p>All occurrences of the same variable name must bind to the same value for the rule to fire.</p>
+<h2 id="cross-domain-rules"><a class="header" href="#cross-domain-rules">Cross-Domain Rules</a></h2>
+<p>Rules can join data across multiple domains:</p>
+<pre><code class="language-yaml">user.rules:
+  plan-event-meal:
+    description: Suggest a meal for an event attendee using an available recipe
+    deduce:
+      diy.planner/Meal:
+        attendee: ?person
+        recipe: ?recipe
+        occasion: ?event
+    when:
+      - diy.planner/Event:
+          this: ?event
+          title: ?title
+      - diy.planner/Meal:
+          this: ?this
+          attendee: ?person
+      - diy.cook/Recipe:
+          this: ?recipe
+          title: ?recipe-name
+</code></pre>
+<p>This rule joins across the <code>diy.planner</code> and <code>diy.cook</code> domains to match events with meals and recipes.</p>
+<h2 id="rules-vs-queries"><a class="header" href="#rules-vs-queries">Rules vs. Queries</a></h2>
+<p>Rules and queries are complementary:</p>
+<ul>
+<li><strong>Queries</strong> ask “what data exists that matches this shape?”</li>
+<li><strong>Rules</strong> define “given data of shape A, derive data of shape B.”</li>
+</ul>
+<p>Rules extend the space of queryable data without materializing it. When you query a concept that has rules, the rules fire and produce derived results alongside concrete data.</p>
+<h2 id="deductive-vs-inductive-rules"><a class="header" href="#deductive-vs-inductive-rules">Deductive vs. Inductive Rules</a></h2>
+<p>The rules described here are <strong>deductive</strong>: they interpret what is already in the database. Dialog also has a concept of <strong>inductive rules</strong> (inspired by <a href="https://www2.eecs.berkeley.edu/Pubs/TechRpts/2009/EECS-2009-173.pdf">Dedalus</a>) that react to changes over time, producing new claims that get asserted back.</p>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p>Inductive rules are prototyped but not yet fully implemented in Carry.</p>
+</blockquote>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="modeling-by-example"><a class="header" href="#modeling-by-example">Modeling by Example</a></h1>
+<p>This chapter walks through complete domain models from simple to complex, showing how attributes, concepts, and rules compose in practice.</p>
+<h2 id="task-tracker-minimal"><a class="header" href="#task-tracker-minimal">Task Tracker (Minimal)</a></h2>
+<p>The simplest useful model – a task with a title, status, and optional priority:</p>
+<pre><code class="language-yaml">app:
+  Task:
+    description: A task to be completed
+    with:
+      title:
+        description: Title of the task
+        as: Text
+      status:
+        description: Current status
+        as: [":todo", ":in-progress", ":done"]
+    maybe:
+      priority:
+        description: Priority level
+        as: [":low", ":medium", ":high"]
+</code></pre>
+<p>Usage:</p>
+<pre><code class="language-bash">carry assert app/schema.yaml
+carry assert task title="Write documentation" status=todo priority=high
+carry assert task title="Review PR" status=in-progress
+carry query task
+carry query task status=todo
+</code></pre>
+<p>Note the use of enumerated symbols (<code>:todo</code>, <code>:in-progress</code>, <code>:done</code>) to constrain allowed values.</p>
+<h2 id="recipe-book-multi-concept"><a class="header" href="#recipe-book-multi-concept">Recipe Book (Multi-Concept)</a></h2>
+<p>A cooking domain with recipes, ingredients, and steps. This demonstrates cross-concept references and <code>cardinality: many</code>:</p>
+<pre><code class="language-yaml">diy.cook:
+  Recipe:
+    description: Meal recipe
+    with:
+      title:
+        description: The name of this recipe
+        as: Text
+      ingredient:
+        description: Ingredients of the recipe
+        cardinality: many
+      steps:
+        description: Steps of the cooking process
+        cardinality: many
+        as: .RecipeStep
+
+  Ingredient:
+    description: The meal ingredient
+    with:
+      name:
+        description: Name of this ingredient
+        as: Text
+      quantity:
+        description: Quantity of the ingredient
+        as: Integer
+      unit:
+        description: The unit of measurement
+        as: [":tsp", ":mls"]
+
+  RecipeStep:
+    description: The cooking step
+    with:
+      instruction:
+        description: Instructions for this step
+        as: Text
+    maybe:
+      after:
+        description: Step to perform this after
+        as: .RecipeStep
+</code></pre>
+<p>Key patterns:</p>
+<ul>
+<li><strong><code>.RecipeStep</code></strong> references another concept within the same domain (the leading <code>.</code> means “relative to this domain”).</li>
+<li><strong><code>cardinality: many</code></strong> on <code>ingredient</code> and <code>steps</code> means a recipe can have multiple of each.</li>
+<li><strong>Self-reference</strong>: <code>RecipeStep.after</code> references another <code>RecipeStep</code>, enabling ordered sequences.</li>
+</ul>
+<h2 id="meal-planner-rules-and-cross-domain-joins"><a class="header" href="#meal-planner-rules-and-cross-domain-joins">Meal Planner (Rules and Cross-Domain Joins)</a></h2>
+<p>A more complex model that spans two domains and uses rules for inference:</p>
+<pre><code class="language-yaml">diy.health:
+  Allergy:
+    description: The allergy a person has
+    with:
+      person:
+        description: Person having an allergy
+      substance:
+        description: Substance the person is allergic to
+        as: Text
+
+diy.planner:
+  Event:
+    description: Event being planned
+    with:
+      title:
+        description: Title of the event
+        as: Text
+      time:
+        description: Time of the event
+        as: Text
+
+  Meal:
+    description: The plan for the meal
+    with:
+      attendee:
+        description: The meal attendee
+      recipe:
+        description: The meal recipe
+      occasion:
+        description: The occasion for the meal
+
+  AllergyConflict:
+    description: A conflict between a recipe ingredient and an allergy
+    with:
+      person:
+        description: The person with the allergy
+      recipe:
+        description: The recipe with the allergenic ingredient
+
+  find-allergy-conflicts:
+    description: Find conflicts between recipe ingredients and allergies
+    deduce:
+      AllergyConflict:
+        person: ?person
+        recipe: ?recipe
+    when:
+      - diy.cook/Recipe:
+          this: ?recipe
+          ingredient: ?ingredient
+      - diy.cook/Ingredient:
+          this: ?ingredient
+          name: ?substance
+      - diy.health/Allergy:
+          this: ?this
+          person: ?person
+          substance: ?substance
+
+  respect-dietary-restrictions:
+    description: A meal that respects dietary restrictions
+    deduce:
+      Meal:
+        attendee: ?person
+        recipe: ?recipe
+        occasion: ?occasion
+    when:
+      - diy.planner/Meal:
+          this: ?this
+          attendee: ?person
+          recipe: ?recipe
+          occasion: ?occasion
+    unless:
+      - diy.planner/AllergyConflict:
+          person: ?person
+          recipe: ?recipe
+</code></pre>
+<p>This model demonstrates:</p>
+<ol>
+<li><strong>Cross-domain references</strong>: The allergy conflict rule joins data from <code>diy.cook</code> (recipes and ingredients) with <code>diy.health</code> (allergies).</li>
+<li><strong>Derived concepts</strong>: <code>AllergyConflict</code> doesn’t store data directly – it’s derived by a rule from existing data.</li>
+<li><strong>Negation</strong>: The <code>respect-dietary-restrictions</code> rule uses <code>unless</code> to exclude meals where an allergy conflict exists.</li>
+<li><strong>Variable unification</strong>: <code>?substance</code> in the <code>find-allergy-conflicts</code> rule must match in both the ingredient name and the allergy substance.</li>
+</ol>
+<h2 id="user-profile-real-world-eav-data"><a class="header" href="#user-profile-real-world-eav-data">User Profile (Real-World EAV Data)</a></h2>
+<p>For highly structured, multi-faceted data like a user profile, you can use EAV triples directly. Here’s a condensed example from the <code>carry.profile</code> domain:</p>
+<pre><code class="language-yaml"># Person
+- the: carry.profile/name
+  of: keri-vasquez
+  is: "Keri Vasquez"
+- the: carry.profile/role_title
+  of: keri-vasquez
+  is: "Independent consultant"
+- the: carry.profile/location
+  of: keri-vasquez
+  is: "Amsterdam, NL"
+
+# Expertise (cardinality: many through multiple entities)
+- the: carry.profile/person
+  of: keri-exp-knowledge-mgmt
+  is: keri-vasquez
+- the: carry.profile/topic
+  of: keri-exp-knowledge-mgmt
+  is: "Knowledge management theory"
+- the: carry.profile/expertise_level
+  of: keri-exp-knowledge-mgmt
+  is: carry.profile/deep
+
+# Communication preferences
+- the: carry.profile/person
+  of: keri-comm-conclusion-first
+  is: keri-vasquez
+- the: carry.profile/description
+  of: keri-comm-conclusion-first
+  is: "Lead with the conclusion, then the reasoning"
+- the: carry.profile/direction
+  of: keri-comm-conclusion-first
+  is: carry.profile/inbound
+</code></pre>
+<p>This pattern uses <strong>satellite entities</strong> (like <code>keri-exp-knowledge-mgmt</code>) linked back to a central person entity. Each satellite carries its own fields, enabling rich, queryable structures without nested objects.</p>
+<h2 id="tips-for-modeling"><a class="header" href="#tips-for-modeling">Tips for Modeling</a></h2>
+<ol>
+<li>
+<p><strong>Start with raw domain assertions.</strong> Don’t design a schema upfront. Assert data as you have it and let patterns emerge.</p>
+</li>
+<li>
+<p><strong>Use domains for namespacing, concepts for structure.</strong> Domains prevent name collisions. Concepts give you validation and named queries.</p>
+</li>
+<li>
+<p><strong>Prefer <code>cardinality: many</code> for lists.</strong> Instead of comma-separated values in a text field, use a many-valued attribute. This makes each item independently queryable.</p>
+</li>
+<li>
+<p><strong>Use entity references for relationships.</strong> Instead of embedding data, reference other entities. This keeps your model normalized and composable.</p>
+</li>
+<li>
+<p><strong>Rules are views, not triggers.</strong> Rules derive data at query time. They don’t materialize new claims into storage. Use them for joins, constraints, and derived aggregates.</p>
+</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="cli-reference"><a class="header" href="#cli-reference">CLI Reference</a></h1>
+<p>Carry provides a small set of commands for interacting with Dialog DB. Every command follows a consistent pattern and shares global options.</p>
+<h2 id="commands"><a class="header" href="#commands">Commands</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Command</th><th>Alias</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><a href="#carry-init"><code>carry init</code></a></td><td><code>i</code></td><td>Create a new repository</td></tr>
+<tr><td><a href="#carry-assert"><code>carry assert</code></a></td><td><code>a</code></td><td>Assert claims (add or update data)</td></tr>
+<tr><td><a href="#carry-query"><code>carry query</code></a></td><td><code>q</code></td><td>Query entities by domain or concept</td></tr>
+<tr><td><a href="#carry-retract"><code>carry retract</code></a></td><td><code>r</code></td><td>Retract claims (remove data)</td></tr>
+<tr><td><a href="#carry-status"><code>carry status</code></a></td><td><code>st</code></td><td>Show repository info</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="global-options"><a class="header" href="#global-options">Global Options</a></h2>
+<p>Every command accepts:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Flag</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>--repo &lt;PATH&gt;</code></td><td>Path to a specific <code>.carry/</code> repository. Skips filesystem walk.</td></tr>
+<tr><td><code>--format &lt;FORMAT&gt;</code></td><td>Output format: <code>yaml</code> (default), <code>json</code>, or <code>triples</code>.</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="repo-resolution"><a class="header" href="#repo-resolution">Repo Resolution</a></h3>
+<p>When <code>--repo</code> is omitted, Carry walks up the filesystem tree from <code>$PWD</code> toward <code>$HOME</code>, looking for a <code>.carry/</code> directory. The first one found is used. You can also set the <code>CARRY_REPO</code> environment variable.</p>
+<h3 id="output-formats"><a class="header" href="#output-formats">Output Formats</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Format</th><th>Description</th><th>Best for</th></tr>
+</thead>
+<tbody>
+<tr><td><code>yaml</code></td><td>Asserted notation (default)</td><td>Human reading, file round-trips</td></tr>
+<tr><td><code>json</code></td><td>Array of objects with <code>id</code> field</td><td>Programmatic consumption</td></tr>
+<tr><td><code>triples</code></td><td>Flat EAV YAML (<code>the</code>/<code>of</code>/<code>is</code>)</td><td>Piping between carry commands</td></tr>
+</tbody>
+</table>
+</div>
+<p>The preferred format can also be persisted as a setting:</p>
+<pre><code class="language-bash">carry assert xyz.tonk.carry output-format=json
+</code></pre>
+<p>Command-line <code>--format</code> always takes precedence over the persisted preference.</p>
+<h2 id="target-syntax"><a class="header" href="#target-syntax">Target Syntax</a></h2>
+<p>Several commands accept a <code>&lt;TARGET&gt;</code> argument. The syntax is:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Pattern</th><th>Interpretation</th><th>Example</th></tr>
+</thead>
+<tbody>
+<tr><td>Contains <code>.</code></td><td>Domain target</td><td><code>com.app.person</code></td></tr>
+<tr><td>No <code>.</code></td><td>Concept target (resolved by bookmark name)</td><td><code>person</code></td></tr>
+<tr><td><code>-</code></td><td>Read from stdin</td><td><code>-</code></td></tr>
+<tr><td>Contains <code>/</code> or ends in <code>.yaml</code>/<code>.yml</code>/<code>.json</code></td><td>File path</td><td><code>schema.yaml</code></td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="field-syntax"><a class="header" href="#field-syntax">Field Syntax</a></h2>
+<p>Commands that accept fields use the format <code>FIELD[=VALUE]</code>:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Syntax</th><th>Meaning</th></tr>
+</thead>
+<tbody>
+<tr><td><code>name</code></td><td>Projection: include this field in output</td></tr>
+<tr><td><code>name="Alice"</code></td><td>Filter: only match entities where name is Alice</td></tr>
+<tr><td><code>this=did:key:z...</code></td><td>Target a specific entity</td></tr>
+<tr><td><code>@myname</code></td><td>Assert <code>dialog.meta/name</code> on the entity (bookmark)</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="value-auto-detection"><a class="header" href="#value-auto-detection">Value Auto-Detection</a></h2>
+<p>When asserting values via the CLI, Carry auto-detects the type:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Input</th><th>Detected Type</th></tr>
+</thead>
+<tbody>
+<tr><td><code>did:key:z...</code></td><td>Entity reference</td></tr>
+<tr><td><code>123</code></td><td>Unsigned integer</td></tr>
+<tr><td><code>-5</code></td><td>Signed integer</td></tr>
+<tr><td><code>3.14</code></td><td>Float</td></tr>
+<tr><td><code>true</code> / <code>false</code></td><td>Boolean</td></tr>
+<tr><td>Anything else</td><td>Text (string)</td></tr>
+</tbody>
+</table>
+</div>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="carry-init"><a class="header" href="#carry-init">carry init</a></h1>
+<p>Create a new Dialog DB repository.</p>
+<h2 id="synopsis"><a class="header" href="#synopsis">Synopsis</a></h2>
+<pre><code>carry init [LABEL] [--repo &lt;PATH&gt;]
+</code></pre>
+<h2 id="description"><a class="header" href="#description">Description</a></h2>
+<p>Creates a <code>.carry/</code> directory. If <code>--repo</code> is not specified, the repository is created in the current working directory.</p>
+<p>The command:</p>
+<ol>
+<li>Generates an Ed25519 keypair for the repository.</li>
+<li>Creates <code>.carry/&lt;did&gt;/</code> with a <code>credentials</code> file and <code>facts/</code> directory.</li>
+<li>Bootstraps the builtin concepts (<code>attribute</code>, <code>concept</code>, <code>bookmark</code>) so they can be used immediately.</li>
+<li>If <code>LABEL</code> is provided, asserts it as the repository label.</li>
+</ol>
+<p>If a <code>.carry/</code> directory already exists at the target location, the command reports its status.</p>
+<h2 id="arguments"><a class="header" href="#arguments">Arguments</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Argument</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>LABEL</code></td><td>Optional label for the repository (e.g., “my-project”)</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="options"><a class="header" href="#options">Options</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Flag</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>--repo &lt;PATH&gt;</code></td><td>Directory where <code>.carry/</code> should be created. Defaults to <code>$PWD</code>.</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="examples"><a class="header" href="#examples">Examples</a></h2>
+<pre><code class="language-bash"># Initialize in current directory
+carry init
+
+# Initialize with a label
+carry init my-project
+
+# Initialize in a specific directory
+carry init --repo /path/to/project
+
+# Initialize with label in specific directory
+carry init my-project --repo /path/to/project
+</code></pre>
+<h2 id="output"><a class="header" href="#output">Output</a></h2>
+<pre><code>Initialized my-project repository in /path/to/.carry/did:key:zAbc123
+</code></pre>
+<h2 id="notes"><a class="header" href="#notes">Notes</a></h2>
+<ul>
+<li>Running <code>carry init</code> inside a directory that is already within an existing repository creates a <strong>nested repository</strong>. Carry does not detect or warn about nesting.</li>
+<li>The DID (e.g., <code>did:key:zAbc123</code>) is derived from the generated public key and is globally unique.</li>
+<li>The private key at <code>.carry/&lt;did&gt;/credentials</code> is stored with mode <code>0600</code> (owner read/write only).</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="carry-assert"><a class="header" href="#carry-assert">carry assert</a></h1>
+<p>Assert claims on entities – add or update data.</p>
+<h2 id="synopsis-1"><a class="header" href="#synopsis-1">Synopsis</a></h2>
+<pre><code>carry assert &lt;TARGET|FILE|-&gt; [this=&lt;ENTITY&gt;] [@name] [FIELD=VALUE ...] [--repo &lt;PATH&gt;] [--format &lt;FMT&gt;]
+</code></pre>
+<h2 id="description-1"><a class="header" href="#description-1">Description</a></h2>
+<p>Assert creates or updates claims. Claims are facts stored as <code>(the: relation, of: entity, is: value)</code>.</p>
+<h3 id="input-modes"><a class="header" href="#input-modes">Input Modes</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Mode</th><th>Syntax</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>Target</td><td><code>carry assert &lt;domain-or-concept&gt; field=value ...</code></td><td>Assert from CLI arguments</td></tr>
+<tr><td>File</td><td><code>carry assert &lt;file.yaml&gt;</code></td><td>Assert from a YAML or JSON file</td></tr>
+<tr><td>Stdin</td><td><code>carry assert -</code></td><td>Assert from standard input</td></tr>
+</tbody>
+</table>
+</div>
+<h3 id="target-detection"><a class="header" href="#target-detection">Target Detection</a></h3>
+<ul>
+<li><code>-</code> is always stdin</li>
+<li>Contains <code>/</code> or ends in <code>.yaml</code>, <code>.yml</code>, <code>.json</code> – file path</li>
+<li>Contains <code>.</code> – domain target</li>
+<li>Otherwise – concept target (resolved by bookmark name)</li>
+</ul>
+<h2 id="arguments-1"><a class="header" href="#arguments-1">Arguments</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Argument</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>TARGET</code></td><td>Domain (e.g., <code>com.app.person</code>) or concept name (e.g., <code>person</code>)</td></tr>
+<tr><td><code>FILE</code></td><td>Path to a YAML or JSON file</td></tr>
+<tr><td><code>-</code></td><td>Read from stdin</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="fields"><a class="header" href="#fields">Fields</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Syntax</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>field=value</code></td><td>Assert this field with this value</td></tr>
+<tr><td><code>this=&lt;DID&gt;</code></td><td>Target an existing entity instead of creating a new one</td></tr>
+<tr><td><code>@name</code></td><td>Assert <code>dialog.meta/name</code> on the entity (creates a bookmark)</td></tr>
+<tr><td><code>with.field=attr</code></td><td>(Concept assertions) Required field referencing an attribute</td></tr>
+<tr><td><code>maybe.field=attr</code></td><td>(Concept assertions) Optional field referencing an attribute</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="options-1"><a class="header" href="#options-1">Options</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Flag</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>--repo &lt;PATH&gt;</code></td><td>Path to <code>.carry/</code> repository</td></tr>
+<tr><td><code>--format &lt;FMT&gt;</code></td><td>Output format: <code>yaml</code>, <code>json</code>, or <code>triples</code></td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="examples-1"><a class="header" href="#examples-1">Examples</a></h2>
+<h3 id="domain-assertions"><a class="header" href="#domain-assertions">Domain Assertions</a></h3>
+<pre><code class="language-bash"># Create a new entity (DID printed to stdout)
+carry assert com.app.person name=Alice age=28
+
+# Update an existing entity
+carry assert com.app.person this=did:key:zAlice age=29
+</code></pre>
+<h3 id="concept-assertions"><a class="header" href="#concept-assertions">Concept Assertions</a></h3>
+<pre><code class="language-bash"># Assert using a defined concept
+carry assert person name=Alice age=28
+</code></pre>
+<h3 id="builtin-concepts"><a class="header" href="#builtin-concepts">Builtin Concepts</a></h3>
+<pre><code class="language-bash"># Define an attribute with a bookmark name
+carry assert attribute @person-name \
+  the=com.app.person/name as=Text cardinality=one \
+  description="Name of a person"
+
+# Define a concept
+carry assert concept @person \
+  description="A person" \
+  with.name=person-name \
+  with.age=person-age
+
+# Create a bookmark
+carry assert bookmark this=did:key:zEntity name=my-entity
+</code></pre>
+<h3 id="file-and-stdin"><a class="header" href="#file-and-stdin">File and Stdin</a></h3>
+<pre><code class="language-bash"># Assert from a YAML file
+carry assert schema.yaml
+
+# Assert from stdin
+carry query person --format triples | carry assert -
+
+# Assert from stdin (asserted notation also works)
+carry query person | carry assert -
+</code></pre>
+<h2 id="file-formats"><a class="header" href="#file-formats">File Formats</a></h2>
+<p>Assert accepts two YAML formats (auto-detected):</p>
+<p><strong>Asserted notation</strong> (from default <code>--format yaml</code>):</p>
+<pre><code class="language-yaml">did:key:zAlice:
+  com.app.person:
+    name: Alice
+    age: 28
+</code></pre>
+<p><strong>EAV triples</strong> (from <code>--format triples</code>):</p>
+<pre><code class="language-yaml">- the: com.app.person/name
+  of: did:key:zAlice
+  is: Alice
+- the: com.app.person/age
+  of: did:key:zAlice
+  is: 28
+</code></pre>
+<p><strong>JSON EAV triples</strong> are also accepted:</p>
+<pre><code class="language-json">[{"the": "com.app.person/name", "of": "did:key:zAlice", "is": "Alice"}]
+</code></pre>
+<h2 id="output-1"><a class="header" href="#output-1">Output</a></h2>
+<p>When creating a new entity (no <code>this=</code>), the generated entity DID is printed to stdout:</p>
+<pre><code>did:key:zNewEntity123
+</code></pre>
+<h2 id="notes-1"><a class="header" href="#notes-1">Notes</a></h2>
+<ul>
+<li>Without <code>this=</code>, a new entity is created with a deterministic DID derived from the content.</li>
+<li>With <code>this=</code>, at least one field is required.</li>
+<li>The <code>@name</code> syntax is shorthand for asserting <code>dialog.meta/name</code> on the entity.</li>
+<li>For concept assertions, if a <code>with</code>/<code>maybe</code> value contains <code>/</code>, it’s treated as an attribute selector (the attribute is looked up or auto-created). Without <code>/</code>, it’s treated as an attribute bookmark name.</li>
+<li>Cardinality defaults to <code>one</code> for attribute assertions if not specified.</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="carry-query"><a class="header" href="#carry-query">carry query</a></h1>
+<p>Query entities by domain or concept.</p>
+<h2 id="synopsis-2"><a class="header" href="#synopsis-2">Synopsis</a></h2>
+<pre><code>carry query &lt;TARGET&gt; [FIELD[=VALUE] ...] [--repo &lt;PATH&gt;] [--format &lt;FMT&gt;]
+</code></pre>
+<h2 id="description-2"><a class="header" href="#description-2">Description</a></h2>
+<p>Query returns matching entities in <a href="#asserted-notation">asserted notation</a>. The target determines the kind of query:</p>
+<ul>
+<li><strong>Domain query</strong> (target contains <code>.</code>): Searches for entities with claims in that domain. You choose which fields to include in output.</li>
+<li><strong>Concept query</strong> (target has no <code>.</code>): Resolves the named concept via bookmark, returns all fields the concept defines.</li>
+</ul>
+<h2 id="arguments-2"><a class="header" href="#arguments-2">Arguments</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Argument</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>TARGET</code></td><td>Domain (e.g., <code>com.app.person</code>) or concept name (e.g., <code>person</code>)</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="fields-1"><a class="header" href="#fields-1">Fields</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Syntax</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>name</code></td><td>Projection – include this field in output</td></tr>
+<tr><td><code>name="Alice"</code></td><td>Filter – only return entities where name matches this value</td></tr>
+</tbody>
+</table>
+</div>
+<p>Filter fields narrow results. Projection fields expand what’s shown. For concept queries, all concept fields are always included in output; specify fields only to filter.</p>
+<h2 id="options-2"><a class="header" href="#options-2">Options</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Flag</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>--repo &lt;PATH&gt;</code></td><td>Path to <code>.carry/</code> repository</td></tr>
+<tr><td><code>--format &lt;FMT&gt;</code></td><td>Output format: <code>yaml</code> (default), <code>json</code>, or <code>triples</code></td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="examples-2"><a class="header" href="#examples-2">Examples</a></h2>
+<h3 id="domain-queries"><a class="header" href="#domain-queries">Domain Queries</a></h3>
+<pre><code class="language-bash"># Get name and age for all entities in the domain
+carry query com.app.person name age
+
+# Filter: only entities where name is Alice
+carry query com.app.person name="Alice" age
+</code></pre>
+<h3 id="concept-queries"><a class="header" href="#concept-queries">Concept Queries</a></h3>
+<pre><code class="language-bash"># Get all fields of the 'person' concept
+carry query person
+
+# Filter by field value
+carry query person name="Alice"
+</code></pre>
+<h3 id="piping"><a class="header" href="#piping">Piping</a></h3>
+<pre><code class="language-bash"># Pipe to assert (copy data)
+carry query person --format triples | carry assert -
+
+# Pipe to retract (remove matching data)
+carry query person name="Alice" --format triples | carry retract -
+
+# Asserted notation also pipes correctly
+carry query com.app.person name age | carry assert -
+</code></pre>
+<h3 id="querying-schema"><a class="header" href="#querying-schema">Querying Schema</a></h3>
+<pre><code class="language-bash"># List all defined attributes
+carry query attribute
+
+# List all defined concepts
+carry query concept
+</code></pre>
+<h2 id="output-formats-1"><a class="header" href="#output-formats-1">Output Formats</a></h2>
+<h3 id="yaml-default"><a class="header" href="#yaml-default">YAML (default)</a></h3>
+<pre><code class="language-yaml">did:key:zAlice:
+  com.app.person:
+    name: Alice
+    age: 28
+
+did:key:zBob:
+  com.app.person:
+    name: Bob
+    age: 35
+</code></pre>
+<h3 id="json---format-json"><a class="header" href="#json---format-json">JSON (<code>--format json</code>)</a></h3>
+<pre><code class="language-json">[{"id": "did:key:zAlice", "name": "Alice", "age": 28}]
+</code></pre>
+<h3 id="triples---format-triples"><a class="header" href="#triples---format-triples">Triples (<code>--format triples</code>)</a></h3>
+<pre><code class="language-yaml">- the: com.app.person/name
+  of: did:key:zAlice
+  is: Alice
+- the: com.app.person/age
+  of: did:key:zAlice
+  is: 28
+</code></pre>
+<h2 id="notes-2"><a class="header" href="#notes-2">Notes</a></h2>
+<ul>
+<li>Domain queries require at least one field to be specified (projection or filter).</li>
+<li>Concept queries with no fields return all entities matching the concept with all of the concept’s fields.</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="carry-retract"><a class="header" href="#carry-retract">carry retract</a></h1>
+<p>Retract claims from entities – remove data.</p>
+<h2 id="synopsis-3"><a class="header" href="#synopsis-3">Synopsis</a></h2>
+<pre><code>carry retract &lt;TARGET|FILE|-&gt; [this=&lt;ENTITY&gt;] [FIELD[=VALUE] ...] [--repo &lt;PATH&gt;] [--format &lt;FMT&gt;]
+</code></pre>
+<h2 id="description-3"><a class="header" href="#description-3">Description</a></h2>
+<p>Retract removes claims from the indexes. Retracted claims no longer appear in query results.</p>
+<h3 id="input-modes-1"><a class="header" href="#input-modes-1">Input Modes</a></h3>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Mode</th><th>Syntax</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td>Target</td><td><code>carry retract &lt;domain-or-concept&gt; this=&lt;entity&gt; field ...</code></td><td>Retract from CLI arguments</td></tr>
+<tr><td>File</td><td><code>carry retract &lt;file.yaml&gt;</code></td><td>Retract from a YAML or JSON file</td></tr>
+<tr><td>Stdin</td><td><code>carry retract -</code></td><td>Retract from standard input</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="arguments-3"><a class="header" href="#arguments-3">Arguments</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Argument</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>TARGET</code></td><td>Domain (e.g., <code>com.app.person</code>) or concept name (e.g., <code>person</code>)</td></tr>
+<tr><td><code>FILE</code></td><td>Path to a YAML or JSON file</td></tr>
+<tr><td><code>-</code></td><td>Read from stdin</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="fields-2"><a class="header" href="#fields-2">Fields</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Syntax</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>field</code></td><td>Retract this field regardless of its current value</td></tr>
+<tr><td><code>field=value</code></td><td>Retract only if the claim matches this exact value</td></tr>
+<tr><td><code>this=&lt;DID&gt;</code></td><td>The entity to retract from (required for target mode)</td></tr>
+</tbody>
+</table>
+</div>
+<p>Using <code>field=value</code> is useful for <code>cardinality: many</code> attributes where an entity has multiple values and you only want to remove one.</p>
+<h2 id="options-3"><a class="header" href="#options-3">Options</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Flag</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>--repo &lt;PATH&gt;</code></td><td>Path to <code>.carry/</code> repository</td></tr>
+<tr><td><code>--format &lt;FMT&gt;</code></td><td>Output format</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="examples-3"><a class="header" href="#examples-3">Examples</a></h2>
+<pre><code class="language-bash"># Retract a field (any value)
+carry retract person this=did:key:zAlice age
+
+# Retract a specific value (for multi-valued fields)
+carry retract person this=did:key:zAlice tag=urgent
+
+# Retract using a domain
+carry retract com.app.person this=did:key:zAlice name age
+
+# Retract all claims on an entity
+carry retract com.app.person this=did:key:zAlice
+
+# Retract from a file
+carry retract retractions.yaml
+
+# Retract from stdin (pipe query output to remove matching data)
+carry query person name="Alice" --format triples | carry retract -
+</code></pre>
+<h2 id="notes-3"><a class="header" href="#notes-3">Notes</a></h2>
+<ul>
+<li>Unlike <code>assert</code>, target-mode <code>retract</code> requires <code>this=</code> to identify which entity to modify.</li>
+<li>Other claims on the entity are unaffected – only the specified fields are retracted.</li>
+<li>Retracted claims are removed from the indexes and no longer appear in query results.</li>
+<li>If no fields are specified with <code>this=</code>, <strong>all</strong> claims on that entity are retracted.</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="carry-status"><a class="header" href="#carry-status">carry status</a></h1>
+<p>Display information about the current repository.</p>
+<h2 id="synopsis-4"><a class="header" href="#synopsis-4">Synopsis</a></h2>
+<pre><code>carry status [--repo &lt;PATH&gt;] [--format &lt;FMT&gt;]
+</code></pre>
+<h2 id="description-4"><a class="header" href="#description-4">Description</a></h2>
+<p>Shows the resolved <code>.carry/</code> repository path and DID.</p>
+<h2 id="options-4"><a class="header" href="#options-4">Options</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Flag</th><th>Description</th></tr>
+</thead>
+<tbody>
+<tr><td><code>--repo &lt;PATH&gt;</code></td><td>Path to <code>.carry/</code> repository</td></tr>
+<tr><td><code>--format &lt;FMT&gt;</code></td><td>Output format: <code>yaml</code> (default) or <code>json</code></td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="examples-4"><a class="header" href="#examples-4">Examples</a></h2>
+<pre><code class="language-bash"># Show status
+carry status
+
+# Show status as JSON
+carry status --format json
+</code></pre>
+<h2 id="output-2"><a class="header" href="#output-2">Output</a></h2>
+<pre><code>Repo: /path/to/project/.carry
+DID: did:key:zAbc123
+</code></pre>
+<p>With <code>--format json</code>:</p>
+<pre><code class="language-json">{
+  "repo": "/path/to/project/.carry",
+  "did": "did:key:zAbc123"
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="persistent-memory-for-ai-tools"><a class="header" href="#persistent-memory-for-ai-tools">Persistent Memory for AI Tools</a></h1>
+<p>The flagship use case for Carry: a shared, private memory layer that multiple AI tools can read from and write to, eliminating session amnesia and cross-tool silos.</p>
+<h2 id="the-problem-1"><a class="header" href="#the-problem-1">The Problem</a></h2>
+<p>If you use more than one AI tool – Cursor, Claude Code, ChatGPT, Copilot – you’ve experienced this:</p>
+<ol>
+<li>You explain your project conventions to Claude. Next session, it’s forgotten.</li>
+<li>You set up rules in Cursor via <code>.cursorrules</code>. Claude doesn’t know about them.</li>
+<li>You build a useful pattern in ChatGPT. There’s no way to share it with your coding tools.</li>
+<li>You copy-paste context between tools manually. It’s fragile and tedious.</li>
+</ol>
+<p>Each tool has its own memory silo. The workarounds – markdown files, per-tool configs, copy-paste – don’t scale.</p>
+<h2 id="how-carry-solves-this"><a class="header" href="#how-carry-solves-this">How Carry Solves This</a></h2>
+<p>Carry provides a <strong>single <code>.carry/</code> repository</strong> that any tool can access:</p>
+<pre><code>Your AI Tools                   Carry Repository
+                                 (.carry/)
+  Cursor    ---read/write---&gt;
+  Claude    ---read/write---&gt;    Shared Memory
+  ChatGPT   ---read/write---&gt;    (Dialog DB)
+  Ollama    ---read/write---&gt;
+</code></pre>
+<h3 id="step-1-initialize"><a class="header" href="#step-1-initialize">Step 1: Initialize</a></h3>
+<pre><code class="language-bash">carry init my-context
+</code></pre>
+<h3 id="step-2-add-your-context"><a class="header" href="#step-2-add-your-context">Step 2: Add Your Context</a></h3>
+<p>Migrate existing context from tool-specific files:</p>
+<pre><code class="language-bash"># Assert your project conventions
+carry assert com.me.conventions \
+  language=TypeScript \
+  style="functional, no classes" \
+  testing="vitest, co-locate tests"
+
+# Assert your preferences
+carry assert com.me.preferences \
+  tone="direct, no preamble" \
+  format="structured markdown" \
+  english_variant=british
+</code></pre>
+<p>Or assert from a YAML file for more complex context:</p>
+<pre><code class="language-yaml"># context.yaml
+_:
+  com.me.project:
+    name: "My App"
+    description: "A local-first task manager"
+    stack: "Rust + TypeScript + Leptos"
+    conventions: "Prefer composition over inheritance"
+
+_:
+  com.me.rules:
+    rule: "Always write tests for new functions"
+    rule: "Use Result types, not exceptions"
+    rule: "Document public APIs with examples"
+</code></pre>
+<pre><code class="language-bash">carry assert context.yaml
+</code></pre>
+<h3 id="step-3-connect-your-tools"><a class="header" href="#step-3-connect-your-tools">Step 3: Connect Your Tools</a></h3>
+<p>Carry can be exposed to any agentic AI tool with shell permissions and access to the Carry CLI.</p>
+<p>Through agentic calls to Carry, your tools share the same context. Cursor knows your conventions. Claude knows your project structure. A new chat session can pick up with all the context built in the last one.</p>
+<h3 id="step-4-let-tools-write-back"><a class="header" href="#step-4-let-tools-write-back">Step 4: Let Tools Write Back</a></h3>
+<p>When an AI tool discovers something useful – a pattern, a decision, a convention that emerged during a coding session – it can write that back to Carry:</p>
+<pre><code class="language-bash">carry assert com.app.decisions \
+  decision="Use SQLite for local storage" \
+  date="2026-03-15" \
+  reason="Simpler than PostgreSQL for single-user local-first"
+</code></pre>
+<p>These decisions are then available to every tool, creating a growing, shared knowledge base.</p>
+<h2 id="what-makes-this-different"><a class="header" href="#what-makes-this-different">What Makes This Different</a></h2>
+<h3 id="vs-cursorrules--claudemd"><a class="header" href="#vs-cursorrules--claudemd">vs. <code>.cursorrules</code> / <code>CLAUDE.md</code></a></h3>
+<p>These are static files that one tool reads. They can’t be written to by the tool, can’t be shared across tools, and have no structure or query capability.</p>
+<p>Carry’s data is structured, queryable, writable by any connected tool, and can evolve over time without manual maintenance.</p>
+<h3 id="vs-cloud-memory-mem0-openai-memory-zep"><a class="header" href="#vs-cloud-memory-mem0-openai-memory-zep">vs. Cloud Memory (Mem0, OpenAI Memory, Zep)</a></h3>
+<p>Cloud services lock your data in a vendor. You don’t control where it lives, who can access it, or how it’s used.</p>
+<p>Carry stores everything locally. No account, no API keys for the storage layer, no data leaving your machine unless you explicitly sync.</p>
+<h3 id="vs-copy-paste--manual-memory"><a class="header" href="#vs-copy-paste--manual-memory">vs. Copy-Paste / Manual Memory</a></h3>
+<p>Manual approaches don’t scale. They break when you forget, when the format changes, or when you switch tools.</p>
+<p>Carry is persistent and structured. Once data is asserted, it stays until you retract it. The format is stable and machine-readable.</p>
+<h2 id="separation-who-wrote-what"><a class="header" href="#separation-who-wrote-what">Separation: Who Wrote What?</a></h2>
+<p>Per-claim provenance tracking (recording who asserted each individual claim and when) is a planned feature. In the meantime, you can use separate repositories for different tools or agents, keeping contributions isolated.</p>
+<h2 id="example-developer-profile"><a class="header" href="#example-developer-profile">Example: Developer Profile</a></h2>
+<p>A practical example of persistent AI context – your developer profile:</p>
+<pre><code class="language-yaml">- the: carry.profile/name
+  of: dev-profile
+  is: "Jane Developer"
+
+- the: carry.profile/preferred_language
+  of: dev-profile
+  is: "Rust"
+
+- the: carry.profile/style
+  of: dev-profile
+  is: "Functional, minimal dependencies, explicit error handling"
+
+- the: carry.profile/testing_preference
+  of: dev-profile
+  is: "Property-based tests where possible, integration tests for IO boundaries"
+
+- the: carry.profile/communication_style
+  of: dev-profile
+  is: "Direct, conclusion first, flag uncertainty explicitly"
+</code></pre>
+<p>Every AI tool that reads from this repository knows your preferences from the first message.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="personal-knowledge-management"><a class="header" href="#personal-knowledge-management">Personal Knowledge Management</a></h1>
+<p>Carry can serve as a structured personal knowledge base – a place to organize notes, expertise, contacts, and project information in a format that’s both human-readable and machine-queryable.</p>
+<h2 id="why-not-just-use-markdown"><a class="header" href="#why-not-just-use-markdown">Why Not Just Use Markdown?</a></h2>
+<p>Markdown files work well for short, declarative content (rules, patterns, quick notes). But they fall short when:</p>
+<ul>
+<li>You want to <strong>query across</strong> your knowledge: “Which contacts work in data engineering?”</li>
+<li>You need <strong>structure that’s consistent</strong>: Every person should have name, role, and context.</li>
+<li>You want your <strong>AI tools to reason</strong> over your data, not just read it.</li>
+<li>Your knowledge base <strong>grows beyond</strong> what fits in a single context window.</li>
+</ul>
+<p>Carry’s fact-based model lets you store structured data that’s both inspectable in a text editor and queryable via the CLI.</p>
+<h2 id="example-personal-crm"><a class="header" href="#example-personal-crm">Example: Personal CRM</a></h2>
+<h3 id="define-the-schema"><a class="header" href="#define-the-schema">Define the Schema</a></h3>
+<pre><code class="language-yaml">contacts:
+  Person:
+    description: A person in my network
+    with:
+      name:
+        description: Full name
+        as: Text
+      role:
+        description: Their role or title
+        as: Text
+    maybe:
+      company:
+        description: Where they work
+        as: Text
+      context:
+        description: How I know them
+        as: Text
+      last_contact:
+        description: When we last spoke
+        as: Text
+      notes:
+        description: Freeform notes
+        as: Text
+</code></pre>
+<h3 id="add-data"><a class="header" href="#add-data">Add Data</a></h3>
+<pre><code class="language-bash">carry assert schema.yaml
+carry assert person name="Alex Good" role="Core maintainer, Automerge" \
+  context="Collaborated on WASM implementation" \
+  last_contact="2026-02"
+
+carry assert person name="Peter Van Hardenburg" role="Researcher, Ink &amp; Switch" \
+  context="Shared trail-runner project" \
+  notes="Interested in local-first tools for thought"
+</code></pre>
+<h3 id="query"><a class="header" href="#query">Query</a></h3>
+<pre><code class="language-bash"># Find everyone I know at a company
+carry query person company="Ink &amp; Switch"
+
+# List all contacts with their roles
+carry query person name role
+
+# Find people I haven't talked to recently
+carry query person name last_contact
+</code></pre>
+<h2 id="example-research-notes"><a class="header" href="#example-research-notes">Example: Research Notes</a></h2>
+<p>Track research topics, findings, and open questions:</p>
+<pre><code class="language-yaml">research:
+  Topic:
+    description: A research topic I'm exploring
+    with:
+      title:
+        description: Topic name
+        as: Text
+      status:
+        description: Current status
+        as: [":active", ":paused", ":completed"]
+    maybe:
+      summary:
+        description: Current understanding
+        as: Text
+      open_questions:
+        description: Unresolved questions
+        as: Text
+        cardinality: many
+
+  Finding:
+    description: A specific finding or insight
+    with:
+      topic:
+        description: Related topic
+      claim:
+        description: The finding
+        as: Text
+      confidence:
+        description: How confident I am
+        as: [":high", ":medium", ":low", ":speculative"]
+    maybe:
+      source:
+        description: Where this came from
+        as: Text
+</code></pre>
+<p>Usage:</p>
+<pre><code class="language-bash">carry assert schema.yaml
+
+carry assert topic @crdt-sync \
+  title="CRDT Synchronization" \
+  status=active \
+  summary="Exploring efficient sync for local-first databases"
+
+carry assert finding \
+  topic=crdt-sync \
+  claim="Prolly trees enable efficient diff-based sync" \
+  confidence=high \
+  source="Dialog DB implementation"
+</code></pre>
+<h2 id="example-reading-list"><a class="header" href="#example-reading-list">Example: Reading List</a></h2>
+<pre><code class="language-bash">carry assert com.me.reading \
+  title="Designing Data-Intensive Applications" \
+  author="Martin Kleppmann" \
+  status=finished \
+  rating=5 \
+  takeaway="Replication and partitioning fundamentals"
+
+carry assert com.me.reading \
+  title="A Philosophy of Software Design" \
+  author="John Ousterhout" \
+  status=in-progress
+
+# What have I finished reading?
+carry query com.me.reading title author status=finished
+</code></pre>
+<h2 id="advantages-over-pkm-tools"><a class="header" href="#advantages-over-pkm-tools">Advantages Over PKM Tools</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th></th><th>Obsidian/Notion/Roam</th><th>Carry</th></tr>
+</thead>
+<tbody>
+<tr><td>Data format</td><td>Proprietary or semi-structured markdown</td><td>Structured YAML claims</td></tr>
+<tr><td>Query language</td><td>Limited (Dataview, formulas)</td><td>Full EAV queries + rules</td></tr>
+<tr><td>AI access</td><td>Plugin-dependent</td><td>Direct via CLI</td></tr>
+<tr><td>Schema</td><td>Informal, drifts over time</td><td>Explicit, validated</td></tr>
+<tr><td>Offline</td><td>Varies</td><td>Always (local-first)</td></tr>
+</tbody>
+</table>
+</div>
+<p>Carry doesn’t replace your PKM tool for long-form writing and linking. It complements it by providing a structured, queryable layer for the data that benefits from consistency and machine access.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="structured-data-modeling"><a class="header" href="#structured-data-modeling">Structured Data Modeling</a></h1>
+<p>Carry can serve as a lightweight, local database for structured data that doesn’t warrant standing up PostgreSQL or managing a cloud service. If your data has entities, relationships, and you want to query across them – Carry might be a good fit.</p>
+<h2 id="when-to-use-carry-for-data"><a class="header" href="#when-to-use-carry-for-data">When to Use Carry for Data</a></h2>
+<p>Carry works well for:</p>
+<ul>
+<li><strong>Highly structured data</strong> with relationships between entities</li>
+<li><strong>Moderate data volumes</strong> (hundreds to thousands of entities)</li>
+<li><strong>Data that benefits from semantic modeling</strong> – where the schema itself carries meaning</li>
+<li><strong>Data you want to query from AI tools</strong> alongside your code</li>
+<li><strong>Private or sensitive data</strong> that shouldn’t leave your machine</li>
+</ul>
+<p>Carry is less suited for:</p>
+<ul>
+<li>Large datasets requiring high-throughput analytics (use a proper OLAP database)</li>
+<li>Short bits of declarative data (plain markdown files are simpler)</li>
+<li>Data that needs concurrent multi-user write access (sync is still developing)</li>
+</ul>
+<h2 id="example-lab-data-management"><a class="header" href="#example-lab-data-management">Example: Lab Data Management</a></h2>
+<p>Research labs often struggle with inconsistent data entry across team members. Carry can provide lightweight schemas that enforce structure:</p>
+<pre><code class="language-yaml">lab.samples:
+  Sample:
+    description: A collected sample
+    with:
+      id:
+        description: Sample identifier
+        as: Text
+      collector:
+        description: Who collected it
+        as: Text
+      date:
+        description: Collection date
+        as: Text
+      type:
+        description: Sample type
+        as: [":blood", ":tissue", ":soil", ":water"]
+    maybe:
+      location:
+        description: Collection location
+        as: Text
+      notes:
+        description: Collection notes
+        as: Text
+      ph:
+        description: pH measurement
+        as: Float
+
+  Measurement:
+    description: A measurement taken on a sample
+    with:
+      sample:
+        description: The sample measured
+      metric:
+        description: What was measured
+        as: Text
+      value:
+        description: The measurement value
+        as: Float
+      unit:
+        description: Unit of measurement
+        as: Text
+    maybe:
+      instrument:
+        description: Instrument used
+        as: Text
+</code></pre>
+<pre><code class="language-bash">carry assert schema.yaml
+
+carry assert sample @sample-001 \
+  id=S-001 collector="Dr. Chen" date="2026-03-15" \
+  type=water location="Station A" ph=7.2
+
+carry assert measurement \
+  sample=sample-001 metric="dissolved oxygen" \
+  value=8.5 unit="mg/L" instrument="YSI ProDSS"
+
+# Query all water samples
+carry query sample id collector date type=water
+
+# Find measurements for a specific sample
+carry query measurement sample=sample-001
+</code></pre>
+<h2 id="example-small-business-operations"><a class="header" href="#example-small-business-operations">Example: Small Business Operations</a></h2>
+<p>A small business tracking customers, orders, and inventory:</p>
+<pre><code class="language-yaml">biz:
+  Customer:
+    description: A customer
+    with:
+      name:
+        description: Customer name
+        as: Text
+      email:
+        description: Email address
+        as: Text
+    maybe:
+      phone:
+        description: Phone number
+        as: Text
+      since:
+        description: Customer since
+        as: Text
+
+  Product:
+    description: A product in inventory
+    with:
+      name:
+        description: Product name
+        as: Text
+      price:
+        description: Unit price
+        as: Float
+      stock:
+        description: Units in stock
+        as: UnsignedInteger
+    maybe:
+      category:
+        description: Product category
+        as: Text
+
+  Order:
+    description: A customer order
+    with:
+      customer:
+        description: The customer who placed the order
+      product:
+        description: The product ordered
+      quantity:
+        description: Number of units
+        as: UnsignedInteger
+      date:
+        description: Order date
+        as: Text
+</code></pre>
+<p>Cross-entity queries:</p>
+<pre><code class="language-bash"># All orders for a customer
+carry query order customer=did:key:zCustomer1
+
+# All products in a category
+carry query product category="electronics"
+</code></pre>
+<h2 id="example-analytics-engineering"><a class="header" href="#example-analytics-engineering">Example: Analytics Engineering</a></h2>
+<p>For analytics engineers familiar with dbt-style transformations, Carry’s rules can model data transformations declaratively:</p>
+<pre><code class="language-yaml">analytics:
+  RawEvent:
+    description: A raw analytics event
+    with:
+      event_type:
+        description: Type of event
+        as: Text
+      user_id:
+        description: User identifier
+        as: Text
+      timestamp:
+        description: Event timestamp
+        as: Text
+    maybe:
+      properties:
+        description: Event properties
+        as: Text
+
+  ActiveUser:
+    description: A user who has been active recently
+    with:
+      user_id:
+        description: User identifier
+        as: Text
+      last_event:
+        description: Most recent event type
+        as: Text
+
+  identify-active-users:
+    description: Derive active users from raw events
+    deduce:
+      ActiveUser:
+        user_id: ?user
+        last_event: ?event_type
+    when:
+      - analytics/RawEvent:
+          this: ?this
+          user_id: ?user
+          event_type: ?event_type
+</code></pre>
+<p>This approach gives you:</p>
+<ul>
+<li><strong>Documented transformations</strong>: The rule description and concept descriptions serve as living documentation.</li>
+<li><strong>Testable logic</strong>: Assert test data, run the rule, verify the output.</li>
+<li><strong>Version-controlled models</strong>: Everything is YAML on disk.</li>
+</ul>
+<h2 id="tips"><a class="header" href="#tips">Tips</a></h2>
+<ol>
+<li>
+<p><strong>Start with data, add schema later.</strong> Assert raw domain claims first. When you see patterns, formalize them into concepts.</p>
+</li>
+<li>
+<p><strong>Use separate repos for environments.</strong> Keep production data in one repository and test data in another by using <code>--repo</code> to target different directories.</p>
+</li>
+<li>
+<p><strong>Export with queries.</strong> Need CSV? Pipe JSON output through <code>jq</code>:</p>
+<pre><code class="language-bash">carry query sample --format json | jq -r '.[] | [.id, .collector, .date] | @csv'
+</code></pre>
+</li>
+<li>
+<p><strong>Rules are your transformation layer.</strong> Instead of writing scripts to join and transform data, express the logic as rules. They’re declarative, documented, and always up to date.</p>
+</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="dialog-db"><a class="header" href="#dialog-db">Dialog DB</a></h1>
+<p>Dialog is the embeddable database engine that powers Carry. Understanding Dialog helps explain why Carry works the way it does and what makes it different from other tools.</p>
+<h2 id="what-is-dialog"><a class="header" href="#what-is-dialog">What is Dialog?</a></h2>
+<p>Dialog is a local-first, semantic database designed for software that works offline, syncs across devices, and keeps data under user control. It is developed as a separate project (<a href="https://github.com/dialog-db/dialog-db">dialog-db</a>) and Carry is one application built on top of it.</p>
+<p>Dialog has three layers:</p>
+<h3 id="associative-layer-memory"><a class="header" href="#associative-layer-memory">Associative Layer (Memory)</a></h3>
+<p>The storage layer. All data is stored as <strong>claims</strong> indexed in three key orderings within a single prolly tree:</p>
+<ul>
+<li><strong>EAV</strong> (Entity -&gt; Attribute -&gt; Value): “What are all the claims about this entity?”</li>
+<li><strong>AVE</strong> (Attribute -&gt; Value -&gt; Entity): “Which entities have this attribute with this value?”</li>
+<li><strong>VAE</strong> (Value -&gt; Attribute -&gt; Entity): “What references this entity?”</li>
+</ul>
+<p>Retractions remove claims from these indexes. A <code>Cause</code> chain links each claim to its predecessor, providing single-link provenance.</p>
+<h3 id="semantic-layer-interpretation"><a class="header" href="#semantic-layer-interpretation">Semantic Layer (Interpretation)</a></h3>
+<p>The interpretation layer. Operates at query time, reading schema primitives (attributes, concepts, rules) from the associative layer and using them to interpret data. This is where schema-on-read happens:</p>
+<ul>
+<li><strong>Attributes</strong> add type and cardinality constraints to relations.</li>
+<li><strong>Concepts</strong> compose attributes into named schemas.</li>
+<li><strong>Rules</strong> derive new concept instances from existing data.</li>
+</ul>
+<p>When you <code>carry query person</code>, the semantic layer reads the <code>person</code> concept definition from storage, matches it against existing claims, and assembles the results.</p>
+<h3 id="reactive-layer-behavior"><a class="header" href="#reactive-layer-behavior">Reactive Layer (Behavior)</a></h3>
+<p>The behavioral layer. Where the semantic layer <em>interprets</em> data, the reactive layer <em>responds</em> to it. Processes would observe concepts and relations, and in response produce new claims. This is where effects, triggers, and inductive rules would live.</p>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p>The reactive layer is not yet implemented. Foundational data structures exist (Z-sets for database stream processing, an <code>Operator</code> trait) but there is no wiring to the query engine and no mechanism to trigger rule re-evaluation on data changes.</p>
+</blockquote>
+<h2 id="key-properties-1"><a class="header" href="#key-properties-1">Key Properties</a></h2>
+<h3 id="schema-on-read"><a class="header" href="#schema-on-read">Schema-on-Read</a></h3>
+<p>Dialog doesn’t require you to define a schema before writing data. You can assert any claim at any time. Schemas (attributes, concepts) are themselves claims in the database – they’re interpreted at query time, not enforced at write time.</p>
+<p>This means:</p>
+<ul>
+<li>You can evolve your schema without migrations.</li>
+<li>New kinds of data can be added without redesigning existing structures.</li>
+<li>Queries can interpret the same data through different schemas.</li>
+</ul>
+<h3 id="retraction-semantics"><a class="header" href="#retraction-semantics">Retraction Semantics</a></h3>
+<p>When you retract a claim, it is removed from the indexes. Each claim records a <code>Cause</code> link to its predecessor, providing basic provenance tracking. A full temporal index with time-travel queries is planned but not yet implemented.</p>
+<h3 id="content-addressed-identity"><a class="header" href="#content-addressed-identity">Content-Addressed Identity</a></h3>
+<p>Attributes and concepts derive their identity from the hash of their content. Two attributes with the same relation, type, and cardinality will have the same DID, regardless of when or where they were created. This gives you convergent identity without coordination.</p>
+<p>Note: Dialog DB itself creates regular entities with random keypairs. Carry adds content-addressed entity identity on top – when you <code>carry assert</code>, the entity DID is derived from a BLAKE3 hash of the asserted fields. This is a Carry-level behavior, not a Dialog DB primitive.</p>
+<h3 id="structural-sync"><a class="header" href="#structural-sync">Structural Sync</a></h3>
+<p>Dialog uses prolly trees for synchronization. When two replicas diverge and later sync, efficient structural diffs identify the changes and merge them automatically. Conflicts are resolved deterministically via hash-based tiebreaking, ensuring all replicas converge to the same state.</p>
+<h2 id="anatomy-of-a-claim"><a class="header" href="#anatomy-of-a-claim">Anatomy of a Claim</a></h2>
+<p>A claim consists of:</p>
+<pre><code>the: &lt;relation&gt;      -- domain/name identifying the kind of association
+of:  &lt;entity&gt;        -- the entity this claim is about (a DID)
+is:  &lt;value&gt;         -- the value being associated
+</code></pre>
+<p>In Carry’s YAML output:</p>
+<pre><code class="language-yaml">- the: com.app.person/name
+  of:  did:key:zAlice
+  is:  Alice
+</code></pre>
+<h2 id="primitive-domains"><a class="header" href="#primitive-domains">Primitive Domains</a></h2>
+<p>Dialog reserves several domains for internal use:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Domain</th><th>Purpose</th></tr>
+</thead>
+<tbody>
+<tr><td><code>dialog.attribute</code></td><td>Attribute identity: <code>/id</code>, <code>/type</code>, <code>/cardinality</code></td></tr>
+<tr><td><code>dialog.concept.with</code></td><td>Required concept fields</td></tr>
+<tr><td><code>dialog.concept.maybe</code></td><td>Optional concept fields</td></tr>
+<tr><td><code>dialog.meta</code></td><td>Universal metadata: <code>/name</code>, <code>/description</code></td></tr>
+<tr><td><code>dialog.rule</code></td><td>Rule definitions: <code>/deduce</code>, <code>/when</code>, <code>/unless</code>, <code>/where</code>, <code>/assert</code></td></tr>
+</tbody>
+</table>
+</div>
+<p>All domains starting with <code>dialog.</code> are reserved. User-defined domains must not use this prefix.</p>
+<h2 id="further-reading"><a class="header" href="#further-reading">Further Reading</a></h2>
+<ul>
+<li><a href="https://gozala.io/dialog/anatomy">Anatomy of Dialog</a> – the authoritative design document</li>
+<li><a href="https://github.com/dialog-db/dialog-db">Dialog DB on GitHub</a> – the source code and architecture decision records</li>
+<li><a href="https://en.wikipedia.org/wiki/Datalog">Datalog</a> – the query language family that inspired Dialog’s rule system</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="architecture"><a class="header" href="#architecture">Architecture</a></h1>
+<p>This page describes how Carry is built and how the pieces fit together.</p>
+<h2 id="repository-layout"><a class="header" href="#repository-layout">Repository Layout</a></h2>
+<p>A Carry repository lives in a <code>.carry/</code> directory:</p>
+<pre><code>project/
+  .carry/
+    @active                        # Plain text: DID of the active space
+    did:key:zSpace1/
+      credentials                  # 32-byte Ed25519 secret key (mode 0600)
+      facts/                       # Dialog DB storage (prolly trees)
+    did:key:zSpace2/
+      credentials
+      facts/
+  src/
+  ...
+</code></pre>
+<h3 id="repo"><a class="header" href="#repo">Repo</a></h3>
+<p>A <strong>repo</strong> is any directory containing a <code>.carry/</code> subdirectory. Carry discovers repos by walking up from <code>$PWD</code> toward <code>$HOME</code>. The <code>--repo</code> flag or <code>CARRY_REPO</code> environment variable can override this.</p>
+<h3 id="space"><a class="header" href="#space">Space</a></h3>
+<p>A <strong>space</strong> is a subdirectory of <code>.carry/</code> named by its <code>did:key:z...</code> DID. Each space contains:</p>
+<ul>
+<li><strong>credentials</strong>: A 32-byte Ed25519 private key. The corresponding public key determines the space’s DID.</li>
+<li><strong>facts/</strong>: Dialog DB’s on-disk storage using prolly trees.</li>
+</ul>
+<p>The active space is tracked in <code>.carry/@active</code> as a plain text DID.</p>
+<h2 id="cryptographic-identity"><a class="header" href="#cryptographic-identity">Cryptographic Identity</a></h2>
+<p>Every space has an Ed25519 keypair:</p>
+<ol>
+<li><strong>Private key</strong>: Stored in <code>credentials</code>. Used to sign claims and authenticate during sync.</li>
+<li><strong>Public key</strong>: Encoded as a <code>did:key:z...</code> using the multicodec Ed25519 prefix + base58-btc encoding. This is the space’s identity.</li>
+</ol>
+<p>Entity DIDs are generated from a BLAKE3 hash of the entity’s content, used as an Ed25519 seed:</p>
+<pre><code>content fields -&gt; sort -&gt; BLAKE3 hash -&gt; Ed25519 signing key -&gt; public key -&gt; did:key:z...
+</code></pre>
+<p>This makes entity identity <strong>deterministic and content-addressed</strong>: the same data always produces the same DID.</p>
+<h2 id="storage"><a class="header" href="#storage">Storage</a></h2>
+<p>Dialog DB stores data in <a href="https://www.dolthub.com/blog/2024-03-08-prolly-trees/">prolly trees</a> – a probabilistic data structure that enables efficient synchronization. Prolly trees are a variant of B-trees where split points are determined by content hashing rather than fixed sizes, making structural diffs between two trees efficient.</p>
+<p>Claims are indexed in three operative indexes:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Index</th><th>Lookup pattern</th><th>Use case</th></tr>
+</thead>
+<tbody>
+<tr><td>EAV</td><td>Entity -&gt; Attribute -&gt; Value</td><td>“What are all the claims about Alice?”</td></tr>
+<tr><td>AVE</td><td>Attribute -&gt; Value -&gt; Entity</td><td>“Who has name = Alice?”</td></tr>
+<tr><td>VAE</td><td>Value -&gt; Attribute -&gt; Entity</td><td>“What references this entity?”</td></tr>
+</tbody>
+</table>
+</div>
+<p>Each claim records a <code>Cause</code> link to its predecessor for basic provenance tracking. A full temporal index is planned but not yet implemented.</p>
+<h2 id="data-flow"><a class="header" href="#data-flow">Data Flow</a></h2>
+<h3 id="assert"><a class="header" href="#assert">Assert</a></h3>
+<pre><code>CLI input -&gt; Parse target/fields -&gt; Resolve concept (if applicable)
+          -&gt; Generate entity DID -&gt; Create claims -&gt; Write to Dialog DB
+</code></pre>
+<ol>
+<li>The target is parsed: domain (contains <code>.</code>) or concept (no <code>.</code>).</li>
+<li>For concepts, the concept definition is loaded and fields are validated.</li>
+<li>An entity DID is generated from the content (or <code>this=</code> is used for an existing entity).</li>
+<li>Claims are constructed and written to the prolly tree indexes.</li>
+</ol>
+<h3 id="query-1"><a class="header" href="#query-1">Query</a></h3>
+<pre><code>CLI input -&gt; Parse target/fields -&gt; Resolve concept (if applicable)
+          -&gt; Build selector -&gt; Scan indexes -&gt; Filter -&gt; Format output
+</code></pre>
+<ol>
+<li>The target is resolved to a domain or concept.</li>
+<li>For concepts, the concept definition determines which attributes to query.</li>
+<li>An <code>ArtifactSelector</code> is built with appropriate filters.</li>
+<li>The EAV and AVE indexes are scanned.</li>
+<li>Results are filtered by any specified field values.</li>
+<li>Output is formatted as YAML, JSON, or triples.</li>
+</ol>
+<h3 id="retract"><a class="header" href="#retract">Retract</a></h3>
+<pre><code>CLI input -&gt; Parse target/fields -&gt; Find matching claims -&gt; Retract from operative indexes
+</code></pre>
+<p>Retractions remove claims from the indexes (EAV/AVE/VAE). The original claim data still exists and can be queried for specifically, but won’t show up in standard queries.</p>
+<h2 id="dependencies"><a class="header" href="#dependencies">Dependencies</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Component</th><th>Crate</th><th>Purpose</th></tr>
+</thead>
+<tbody>
+<tr><td>CLI framework</td><td><code>clap</code></td><td>Command parsing and help generation</td></tr>
+<tr><td>Dialog DB</td><td><code>dialog-query</code>, <code>dialog-artifacts</code></td><td>Database engine</td></tr>
+<tr><td>Tonk</td><td><code>tonk-space</code></td><td>Space management and filesystem backend</td></tr>
+<tr><td>Crypto</td><td><code>ed25519-dalek</code>, <code>blake3</code>, <code>bs58</code></td><td>Key generation, hashing, encoding</td></tr>
+<tr><td>Async runtime</td><td><code>tokio</code></td><td>Async I/O</td></tr>
+<tr><td>Serialization</td><td><code>serde_yaml</code>, <code>serde_json</code></td><td>YAML and JSON parsing/formatting</td></tr>
+</tbody>
+</table>
+</div>
+<h2 id="platform-support"><a class="header" href="#platform-support">Platform Support</a></h2>
+<p>Carry compiles for native targets (macOS, Linux). The crate is gated with <code>#[cfg(not(target_arch = "wasm32"))]</code> – it compiles to an empty <code>main()</code> on wasm32 targets since the CLI requires filesystem access.</p>
+<h2 id="future-sync"><a class="header" href="#future-sync">Future: Sync</a></h2>
+<p>Carry’s sync capabilities are being developed. The planned architecture:</p>
+<ul>
+<li><strong>Push/Pull</strong>: <code>carry push</code> and <code>carry pull</code> synchronize with a configured upstream remote.</li>
+<li><strong>Invite/Join</strong>: <code>carry invite</code> generates invite URLs with UCAN delegations. <code>carry join</code> configures an upstream from an invite URL.</li>
+<li><strong>Structural merge</strong>: Dialog’s prolly tree storage enables efficient structural diffs and deterministic merging of divergent replicas.</li>
+</ul>
+<p>Sync uses UCAN (User Controlled Authorization Networks) for capability-based access control. Each invite delegates specific capabilities from the space owner to the invitee.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr-ef4e11c1.min.js"></script>
+        <script src="mark-09e88c2c.min.js"></script>
+        <script src="searcher-c2a407aa.js"></script>
+
+        <script src="clipboard-1626706a.min.js"></script>
+        <script src="highlight-abc7f01d.js"></script>
+        <script src="book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+
+        <script>
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+
+
+    </div>
+    </body>
+</html>
