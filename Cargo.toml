@@ -1,3 +1,120 @@
+[workspace]
+
+[workspace.package]
+version = "0.1.0"
+authors = [
+    "Tonk Labs",
+]
+edition = "2024"
+license = "MIT"
+
+[workspace.dependencies]
+carry = { git = "https://github.com/tonk-labs/tonk.git", branch = "feat/carry" }
+tonk-access-service = { git = "https://github.com/tonk-labs/tonk.git", branch = "feat/carry" }
+tonk-common = { git = "https://github.com/tonk-labs/tonk.git", branch = "feat/carry" }
+tonk-space = { git = "https://github.com/tonk-labs/tonk.git", branch = "feat/carry" }
+tonk-ui = { git = "https://github.com/tonk-labs/tonk.git", branch = "feat/carry" }
+tonk-worker = { git = "https://github.com/tonk-labs/tonk.git", branch = "feat/carry" }
+anyhow = "1"
+async-trait = "0.1"
+axum = { version = "0.8", default-features = false }
+axum-wasm-macros = "0.1"
+base58 = "0.2"
+base64 = "0.22"
+blake3 = "1.5"
+bs58 = "0.5"
+bytes = "1"
+chrono = { version = "0.4", default-features = false, features = [
+    "clock",
+    "wasmbind",
+] }
+ciborium = "0.2"
+clap = { version = "4", features = [
+    "derive",
+] }
+clap_complete = { version = "4", features = [
+    "unstable-dynamic",
+] }
+console_error_panic_hook = "0.1"
+crypto-common = "=0.2.0-rc.5"
+dialoguer = "0.11"
+digest = "=0.11.0-rc.4"
+dirs = "5"
+ed25519-dalek = { version = "2.1", features = [
+    "rand_core",
+] }
+futures = "0.3"
+futures-core = "0.3"
+futures-util = "0.3"
+getrandom = { version = "0.4", features = [
+    "wasm_js",
+] }
+getrandom_0_2 = { package = "getrandom", version = "0.2", features = [
+    "js",
+] }
+getrandom_0_3 = { package = "getrandom", version = "0.3", features = [
+    "wasm_js",
+] }
+hex = "0.4"
+hkdf = "0.12"
+http-body-util = "0.1"
+hyper = "1"
+hyper-util = "0.1"
+idb = "0.6"
+ipld-core = { version = "0.4", features = [
+    "serde",
+] }
+keyring = "3.6"
+leptos = "0.8"
+leptos_router = "0.8"
+leptos-use = "0.17"
+port_check = "0.3"
+rand = "0.9"
+rand_0_8 = { package = "rand", version = "0.8" }
+rand_core = "0.9"
+reqwest = "0.13"
+serde = "1"
+serde_bytes = "0.11"
+serde_ipld_dagcbor = "0.6"
+serde_json = "1"
+serde_yaml = "0.9"
+serial_test = "3"
+sha2_0_10 = { package = "sha2", version = "0.10" }
+tempfile = "3"
+thirtyfour = "0.36"
+thiserror = "2"
+tokio = "1"
+tokio-stream = "0.1"
+tokio-util = { version = "0.7", features = [
+    "io",
+] }
+tower = "0.5"
+tower-service = "0.3"
+ulid = "1"
+url = "2"
+walkdir = "2"
+wasm-streams = "0.4"
+web-time = "1"
+webbrowser = "1.0"
+worker = "0.7.4"
+worker-macros = "0.7.4"
+js-sys = "0.3"
+wasm-bindgen = "=0.2.108"
+wasm-bindgen-futures = "0.4"
+wasm-bindgen-test = "0.3"
+web-sys = { version = "0.3" }
+dialog-artifacts = { git = "https://github.com/dialog-db/dialog-db.git", tag = "tonk-2026-02-14" }
+dialog-capability = { git = "https://github.com/dialog-db/dialog-db.git", tag = "tonk-2026-02-14" }
+dialog-common = { git = "https://github.com/dialog-db/dialog-db.git", tag = "tonk-2026-02-14" }
+dialog-credentials = { git = "https://github.com/dialog-db/dialog-db.git", tag = "tonk-2026-02-14" }
+dialog-query = { git = "https://github.com/dialog-db/dialog-db.git", tag = "tonk-2026-02-14" }
+dialog-s3-credentials = { git = "https://github.com/dialog-db/dialog-db.git", tag = "tonk-2026-02-14", features = [
+    "ucan",
+] }
+dialog-storage = { git = "https://github.com/dialog-db/dialog-db.git", tag = "tonk-2026-02-14" }
+dialog-ucan = { git = "https://github.com/dialog-db/dialog-db.git", tag = "tonk-2026-02-14" }
+dialog-varsig = { git = "https://github.com/dialog-db/dialog-db.git", tag = "tonk-2026-02-14" }
+
 [package]
 name = "carry"
 version.workspace = true
